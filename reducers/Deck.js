@@ -4,6 +4,10 @@ import {
 } from '../actions/Deck'
 
 function decks(state = {}, action) {
+  const { title } = action
+  console.log(title)
+  console.log(action)
+
   switch (action.type) {
     case RECEIVE_DECKS: {
       return {
@@ -12,7 +16,13 @@ function decks(state = {}, action) {
       }
     }
     case ADD_DECK: {
-      return {}
+      return {
+        ...state,
+        [title]: {
+          title,
+          questions: [],
+        }
+      }
     }
     default:
       return state

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, TouchableOpacity } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native'
 import { connect } from 'react-redux'
 
 import { styles } from '../utils/styles'
 import { Check } from '../utils/icons'
+
+import { addDeck } from '../actions/Deck'
 
 class DeckEdit extends Component {
   state = {
@@ -14,12 +16,45 @@ class DeckEdit extends Component {
     return {
       headerRight: (
         <TouchableOpacity
-          onPress={() => navigation.navigate('DeckDetail')}
+          onPress={() => {
+
+            const { input, addDeck, deckTitles } = navigation.state.params
+
+            // console.log(input, deckTitles)
+
+            // console.log(deckTitles.indexOf(input))
+            if (deckTitles.indexOf(input) === 0) {
+              Alert.alert(
+                'This name has been used',
+                null,
+                [{text: 'OK'}],
+                { cancelable: false }
+              )
+              return
+            }
+
+            console.log('hi')
+
+
+            // addDeck({ title: input })
+
+            // navigation.navigate(
+            //   'DeckDetail',
+            //   { deckTitle: input }
+            // )
+          }}
         >
           <Check />
         </TouchableOpacity>
       )
     }
+  }
+
+  componentDidMount() {
+    const { addDeck, deckTitles } = this.props
+
+    this.props.navigation.setParams({ addDeck })
+    this.props.navigation.setParams({ deckTitles })
   }
 
   render() {
@@ -29,19 +64,29 @@ class DeckEdit extends Component {
         <View style={styles.container}>
           <TextInput style={styles.deckName} placeholder='Deck Name'
               value={input}
-              onChangeText={(input) => {this.setState({ input })}}
+              onChangeText={(input) => {
+                this.setState({ input })
+                this.props.navigation.setParams({ input })
+              }}
             />
         </View>
       )
   }
 }
 
-function mapStateToProps () {
-  return {}
+function mapStateToProps ({ decks }) {
+  return {
+    deckTitles: Object.keys(decks).reduce((result, id) => {
+      result.push(decks[id].title)
+      return result
+    }, [])
+  }
 }
 
-function mapDispatchToProps () {
-  return {}
+function mapDispatchToProps (dispatch) {
+  return {
+    addDeck: (data) => dispatch(addDeck(data))
+  }
 }
 
 export default connect(
