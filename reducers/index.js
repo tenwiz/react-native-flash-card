@@ -5,5 +5,5 @@ import cards from './Card'
 
 export default combineReducers({
   decks,
-  cards
+  cards,
 })

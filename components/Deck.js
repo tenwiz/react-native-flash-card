@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TextInput, Dimensions } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { FontAwesome, Entypo } from '@expo/vector-icons'
+import { Ionicons, FontAwesome } from '@expo/vector-icons'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
 import { fetchFlashCardResults } from '../utils/api'
-import { white } from '../utils/colors'
+import { styles } from '../utils/styles'
 
 import { receiveDecks } from '../actions/Deck'
 
 class Deck extends Component {
   state = {
-    query: ''
+    query: '',
   }
 
   componentDidMount() {
@@ -21,9 +21,11 @@ class Deck extends Component {
   }
 
   render() {
-    const { query } = this.state
+    // Store
     const { decks } = this.props
-    // console.log(decks)
+
+    // State
+    const { query } = this.state
 
     let showingDecks
     if (query) {
@@ -39,60 +41,35 @@ class Deck extends Component {
       <View style={styles.container}>
 
         <View style={styles.header}>
-          <FontAwesome name='search' size={50} />
-          <TextInput style={{height: 60, width: width - 110, fontSize: 20,}}
+          <Ionicons name='ios-search' size={50} />
+          <TextInput style={styles.searchInput} placeholder='Search decks'
               value={query}
-              placeholder='Search decks'
               onChangeText={(query) => {this.setState({ query })}}
             />
-          <Entypo name='add-to-list' size={50} />
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('DeckEdit')}
+          >
+            <Ionicons name='ios-add' size={50} />
+          </TouchableOpacity>
         </View>
 
         {showingDecks.map(deck => (
             <View style={styles.deck} key={deck.title}>
-              <View style={{width: width - 100, marginLeft: 20}}>
-                <Text style={{fontSize: 30, textAlign: 'center'}}>{deck.title}</Text>
-                <Text style={{marginTop: 5, fontSize: 20, textAlign: 'center'}}>{deck.questions.length} cards</Text>
+              <View style={styles.deckText}>
+                <Text style={styles.deckTitle}>{deck.title}</Text>
+                <Text style={styles.deckNum}>{deck.questions.length} cards</Text>
               </View>
               <View>
-                <FontAwesome name='edit' size={20} style={{marginTop: 5}}/>
-                <FontAwesome name='trash-o' size={20} style={{marginTop: 15}}/>
+                <FontAwesome style={styles.iconEdit} name='edit' size={20} />
+                <FontAwesome style={styles.iconTrash} name='trash-o' size={20} />
               </View>
             </View>
           ))}
-
 
       </View>
     )
   }
 }
-
-const { width, height } = Dimensions.get('window')
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 5,
-    alignItems: 'center',
-    backgroundColor: white,
-  },
-  header: {
-    flexDirection: 'row',
-  },
-  deck: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowOpacity: 0.3,
-    shadowOffset: {
-      height: 0,
-      width: 0,
-    },
-    width: width - 20,
-    height: 100,
-    marginBottom: 10,
-  },
-})
 
 function mapStateToProps ({ decks }) {
   return {

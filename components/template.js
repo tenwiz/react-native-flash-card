@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 
-class DeckDetail extends Component {
-
+class Template extends Component {
+  render() {
+    return (
+      <View>
+        <Text>hello</Text>
+      </View>
+    )
+  }
 }
 
 function mapStateToProps () {
@@ -17,4 +23,4 @@ function mapDispatchToProps () {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(DeckDetail)
+)(Template)

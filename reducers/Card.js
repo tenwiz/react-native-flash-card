@@ -1,4 +1,6 @@
-import { ADD_CARD } from '../actions/Card'
+import {
+  ADD_CARD,
+} from '../actions/Card'
 
 function cards(state = {}, action) {
   switch (action.type) {

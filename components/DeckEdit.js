@@ -1,9 +1,26 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 
-class DeckEdit extends Component {
+import { styles } from '../utils/styles'
 
+class DeckEdit extends Component {
+  state = {
+    input: '',
+  }
+
+  render() {
+    const { input } = this.state
+
+    return (
+        <View style={styles.container}>
+          <TextInput style={styles.input} placeholder='Deck Name'
+              value={input}
+              onChangeText={(input) => {this.setState({ input })}}
+            />
+        </View>
+      )
+  }
 }
 
 function mapStateToProps () {
