@@ -3,24 +3,38 @@ import { StyleSheet, Dimensions } from 'react-native'
 export const { width } = Dimensions.get('window')
 
 export const styles = StyleSheet.create({
+  viewPort: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     padding: 5,
     alignItems: 'center',
     backgroundColor: 'white',
   },
+  back: {
+    marginLeft: 10,
+    marginTop: 2,
+  },
+  check: {
+    marginRight: 10,
+    marginTop: 5,
+  },
 
+  /*
+  DeckMain
+  */
 
   header: {
     flexDirection: 'row',
   },
-  searchInput: {
-    height: 60,
+  search: {
+    height: 50,
     width: width - 110,
     marginLeft: 10,
     fontSize: 20,
   },
-  deck: {
+  deckMain: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -41,24 +55,37 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
   },
-  deckNum: {
+  deckBody: {
     marginTop: 5,
     fontSize: 20,
     textAlign: 'center',
   },
-  iconEdit: {
-    marginTop: 5,
+  deckEdit: {
+    marginTop: 8,
   },
-  iconTrash: {
-    marginTop: 15,
+  deckRemove: {
+    marginTop: 13,
   },
 
-  input: {
+  /*
+  DeckEdit
+  */
+
+  deckName: {
     width: 250,
     height: 44,
     padding: 8,
     borderWidth: 1,
     borderColor: 'gray',
     marginTop: 250,
+  },
+
+  /*
+  DeckDetail
+  */
+
+  cardAdd: {
+    marginRight: 10,
+    marginTop: 6,
   },
 })

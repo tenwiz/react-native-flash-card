@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { Ionicons, FontAwesome } from '@expo/vector-icons'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
 import { fetchFlashCardResults } from '../utils/api'
 import { styles } from '../utils/styles'
+import { Search, DeckAdd, DeckEdit, DeckRemove } from '../utils/icons'
 
 import { receiveDecks } from '../actions/Deck'
 
-class Deck extends Component {
+class DeckMain extends Component {
   state = {
     query: '',
   }
@@ -41,30 +41,37 @@ class Deck extends Component {
       <View style={styles.container}>
 
         <View style={styles.header}>
-          <Ionicons name='ios-search' size={50} />
-          <TextInput style={styles.searchInput} placeholder='Search decks'
+          <Search />
+          <TextInput style={styles.search} placeholder='Search decks'
               value={query}
               onChangeText={(query) => {this.setState({ query })}}
             />
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('DeckEdit')}
           >
-            <Ionicons name='ios-add' size={50} />
+            <DeckAdd />
           </TouchableOpacity>
         </View>
 
         {showingDecks.map(deck => (
-            <View style={styles.deck} key={deck.title}>
+          <TouchableOpacity key={deck.title}
+            onPress={() => this.props.navigation.navigate(
+              'DeckDetail',
+              { deckTitle: deck.title }
+            )}
+          >
+            <View style={styles.deckMain}>
               <View style={styles.deckText}>
                 <Text style={styles.deckTitle}>{deck.title}</Text>
-                <Text style={styles.deckNum}>{deck.questions.length} cards</Text>
+                <Text style={styles.deckBody}>{deck.questions.length} cards</Text>
               </View>
               <View>
-                <FontAwesome style={styles.iconEdit} name='edit' size={20} />
-                <FontAwesome style={styles.iconTrash} name='trash-o' size={20} />
+                <DeckEdit />
+                <DeckRemove />
               </View>
             </View>
-          ))}
+          </TouchableOpacity>
+        ))}
 
       </View>
     )
@@ -89,4 +96,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Deck)
+)(DeckMain)

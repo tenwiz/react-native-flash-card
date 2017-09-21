@@ -1,14 +1,17 @@
-import React from 'react'
-import { Text, View, StatusBar, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react'
+import { Text, View, StatusBar } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { Constants } from 'expo'
 import { StackNavigator } from 'react-navigation'
-import { Ionicons } from '@expo/vector-icons'
+
+import { styles } from './utils/styles'
+import DeckMain from './components/DeckMain'
+import DeckEdit from './components/DeckEdit'
+import DeckDetail from './components/DeckDetail'
+import CardEdit from './components/CardEdit'
 
 import reducer from './reducers'
-import Deck from './components/Deck'
-import DeckEdit from './components/DeckEdit'
 
 function AppStatusBar ({backgroundColor, ...props}) {
   return (
@@ -19,11 +22,11 @@ function AppStatusBar ({backgroundColor, ...props}) {
 }
 
 const Navigator = StackNavigator({
-  Deck: {
-    screen: Deck,
+  DeckMain: {
+    screen: DeckMain,
     navigationOptions: {
       header: null,
-    }
+    },
   },
   DeckEdit: {
     screen: DeckEdit,
@@ -33,21 +36,35 @@ const Navigator = StackNavigator({
       headerStyle: {
         paddingTop: 0,
       },
-      headerRight: (
-        <TouchableOpacity>
-          <Ionicons name='ios-checkmark' size={50} style={{marginRight: 10, marginTop: 5}} />
-        </TouchableOpacity>
-      )
-    }
+    },
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: {
+      headerTintColor: 'black',
+      headerStyle: {
+        paddingTop: 0,
+      },
+    },
+  },
+  CardEdit: {
+    screen: CardEdit,
+    navigationOptions: {
+      title: 'Card',
+      headerTintColor: 'black',
+      headerStyle: {
+        paddingTop: 0,
+      },
+    },
   }
 })
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
-        <View style={{flex: 1}}>
-          <AppStatusBar backgroundColor={'gray'} barStyle="light-content" />
+        <View style={styles.viewPort}>
+          <AppStatusBar backgroundColor={'gray'} barStyle='light-content' />
           <Navigator />
         </View>
       </Provider>

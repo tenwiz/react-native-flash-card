@@ -1,12 +1,25 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 import { styles } from '../utils/styles'
+import { Check } from '../utils/icons'
 
 class DeckEdit extends Component {
   state = {
     input: '',
+  }
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('DeckDetail')}
+        >
+          <Check />
+        </TouchableOpacity>
+      )
+    }
   }
 
   render() {
@@ -14,7 +27,7 @@ class DeckEdit extends Component {
 
     return (
         <View style={styles.container}>
-          <TextInput style={styles.input} placeholder='Deck Name'
+          <TextInput style={styles.deckName} placeholder='Deck Name'
               value={input}
               onChangeText={(input) => {this.setState({ input })}}
             />
