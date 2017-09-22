@@ -5,13 +5,13 @@ import { styles } from './styles'
 
 export function Back() {
   return (
-    <Ionicons style={styles.back} name='ios-arrow-back' size={30} />
+    <Ionicons name='ios-arrow-back' size={50} />
   )
 }
 
 export function Check() {
   return (
-    <Ionicons style={styles.check} name='ios-checkmark' size={50} />
+    <Ionicons name='md-checkmark' size={50} />
   )
 }
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, View, StatusBar } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { Constants } from 'expo'
 import { StackNavigator } from 'react-navigation'
 
 import { styles } from './utils/styles'
@@ -16,7 +15,7 @@ import reducer from './reducers'
 function AppStatusBar ({backgroundColor, ...props}) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+      <StatusBar backgroundColor={backgroundColor} {...props} />
     </View>
   )
 }
@@ -31,30 +30,19 @@ const Navigator = StackNavigator({
   DeckEdit: {
     screen: DeckEdit,
     navigationOptions: {
-      title: 'Deck',
-      headerTintColor: 'black',
-      headerStyle: {
-        paddingTop: 0,
-      },
+      header: null,
     },
   },
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: {
-      headerTintColor: 'black',
-      headerStyle: {
-        paddingTop: 0,
-      },
+      header: null,
     },
   },
   CardEdit: {
     screen: CardEdit,
     navigationOptions: {
-      title: 'Card',
-      headerTintColor: 'black',
-      headerStyle: {
-        paddingTop: 0,
-      },
+      header: null,
     },
   }
 })
@@ -64,7 +52,9 @@ export default class App extends Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.viewPort}>
-          <AppStatusBar backgroundColor={'gray'} barStyle='light-content' />
+          <View style={styles.statusBar}>
+            <StatusBar />
+          </View>
           <Navigator />
         </View>
       </Provider>

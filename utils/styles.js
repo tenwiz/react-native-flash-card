@@ -1,24 +1,28 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { Constants } from 'expo'
 
 export const { width } = Dimensions.get('window')
 
 export const styles = StyleSheet.create({
+  statusBar: {
+    backgroundColor: '#E0E0E0',
+    height: Constants.statusBarHeight ,
+  },
   viewPort: {
     flex: 1,
   },
   container: {
     flex: 1,
-    padding: 5,
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#FAFAFA',
   },
   back: {
-    marginLeft: 10,
-    marginTop: 2,
+    // marginLeft: 10,
+    // marginTop: 2,
   },
   check: {
-    marginRight: 10,
-    marginTop: 5,
+    // marginRight: 10,
+    // marginTop: 5,
   },
 
   /*
@@ -27,6 +31,10 @@ export const styles = StyleSheet.create({
 
   header: {
     flexDirection: 'row',
+    width,
+    backgroundColor: '#F5F5F5',
+    marginBottom: 10,
+    borderBottomWidth: 1,
   },
   search: {
     height: 50,
@@ -35,6 +43,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   deckMain: {
+    backgroundColor: '#FFFFFF',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

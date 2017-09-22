@@ -3,7 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native'
 import { connect } from 'react-redux'
 
 import { styles } from '../utils/styles'
-import { Check } from '../utils/icons'
+import { Back, Check } from '../utils/icons'
 
 import { addDeck } from '../actions/Deck'
 
@@ -12,53 +12,52 @@ class DeckEdit extends Component {
     input: '',
   }
 
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerRight: (
-        <TouchableOpacity
-          onPress={() => {
-            const { input, addDeck, deckTitles } = navigation.state.params
-
-            if (deckTitles.indexOf(input) !== -1) {
-              Alert.alert(
-                'This name has been used',
-                null,
-                [{text: 'OK'}],
-                { cancelable: false }
-              )
-              return
-            }
-
-            addDeck({ title: input })
-
-            navigation.navigate(
-              'DeckDetail',
-              { deckTitle: input }
-            )
-          }}
-        >
-          <Check />
-        </TouchableOpacity>
-      )
-    }
-  }
-
-  componentDidMount() {
+  render() {
+    // Store
     const { addDeck, deckTitles } = this.props
 
-    this.props.navigation.setParams({ addDeck, deckTitles })
-  }
-
-  render() {
+    // State
     const { input } = this.state
 
     return (
         <View style={styles.container}>
+
+          <View style={styles.header}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('DeckMain')}
+            >
+              <Back />
+            </TouchableOpacity>
+            <Text style={styles.search}>Deck</Text>
+            <TouchableOpacity
+              onPress={() => {
+
+                if (deckTitles.indexOf(input) !== -1) {
+                  Alert.alert(
+                    'This name has been used',
+                    null,
+                    [{text: 'OK'}],
+                    { cancelable: false }
+                  )
+                  return
+                }
+
+                addDeck({ title: input })
+
+                this.props.navigation.navigate(
+                  'DeckDetail',
+                  { deckTitle: input }
+                )
+              }}
+            >
+              <Check />
+            </TouchableOpacity>
+          </View>
+
           <TextInput style={styles.deckName} placeholder='Deck Name'
               value={input}
               onChangeText={(input) => {
                 this.setState({ input })
-                this.props.navigation.setParams({ input })
               }}
             />
         </View>
