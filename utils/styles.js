@@ -24,8 +24,8 @@ export const styles = StyleSheet.create({
   },
   middle: {
     width: width - 110,
-    marginTop: 10,
-    fontSize: 30,
+    marginTop: 15,
+    fontSize: 25,
     textAlign: 'center',
   },
   right: {

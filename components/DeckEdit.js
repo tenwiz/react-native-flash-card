@@ -28,10 +28,22 @@ class DeckEdit extends Component {
             >
               <Back />
             </TouchableOpacity>
-            <Text style={styles.middle}>Deck</Text>
+            <Text style={styles.middle}>DECK</Text>
             <TouchableOpacity
               onPress={() => {
-                if (deckTitles.indexOf(input) !== -1) {
+                const inputTrim = input.trim()
+
+                if (inputTrim === '') {
+                  Alert.alert(
+                    'You have to enter a name',
+                    null,
+                    [{text: 'OK'}],
+                    { cancelable: false }
+                  )
+                  return
+                }
+
+                if (deckTitles.indexOf(inputTrim) !== -1) {
                   Alert.alert(
                     'This name has been used',
                     null,
@@ -41,11 +53,11 @@ class DeckEdit extends Component {
                   return
                 }
 
-                addDeck({ title: input })
+                addDeck({ title: inputTrim })
 
                 this.props.navigation.navigate(
                   'DeckDetail',
-                  { deckTitle: input }
+                  { deckTitle: inputTrim }
                 )
               }}
             >

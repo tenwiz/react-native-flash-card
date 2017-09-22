@@ -6,41 +6,44 @@ import { styles } from '../utils/styles'
 import { Back, CardAdd } from '../utils/icons'
 
 class DeckDetail extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: navigation.state.params.deckTitle,
-      headerLeft: (
-        <TouchableOpacity
-          onPress={() => navigation.navigate('DeckMain')}
-        >
-          <Back />
-        </TouchableOpacity>
-      ),
-      headerRight: (
-        <TouchableOpacity
-          onPress={() => navigation.navigate('CardEdit')}
-        >
-          <CardAdd />
-        </TouchableOpacity>
-      )
-    }
-  }
-
   render() {
+    // Store
+    const { deck } = this.props
+
+    const barTitle = `${deck.title} (${deck.questions.length})`
 
     return (
       <View style={styles.container}>
+
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('DeckMain')}
+          >
+            <Back />
+          </TouchableOpacity>
+          <Text style={styles.middle}>{barTitle}</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate(
+              'CardEdit',
+              { deckTitle: deck.title }
+            )}
+          >
+            <CardAdd />
+          </TouchableOpacity>
+        </View>
+
         <Text>hello</Text>
+
       </View>
     )
   }
 }
 
-function mapStateToProps (state, { navigation }) {
+function mapStateToProps ({ decks }, { navigation }) {
   const { deckTitle } = navigation.state.params
 
   return {
-    deck: state[deckTitle]
+    deck: decks[deckTitle]
   }
 }
 
