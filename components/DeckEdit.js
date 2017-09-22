@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { styles } from '../utils/styles'
 import { Back, Check } from '../utils/icons'
 
-import { addDeck } from '../actions/Deck'
+import { addDeck, editDeck } from '../actions/Deck'
 
 class DeckEdit extends Component {
   state = {
@@ -13,18 +13,25 @@ class DeckEdit extends Component {
   }
 
   render() {
+    // Navigation
+    const { navigation } = this.props
+    const { operation } = navigation.state.params
+
     // Store
-    const { addDeck, deckTitles } = this.props
+    const { addDeck, editDeck, deckTitles } = this.props
 
     // State
     const { input } = this.state
+
+    console.log('------------------------------------')
+        console.log(this.props)
 
     return (
         <View style={styles.container}>
 
           <View style={styles.header}>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('DeckMain')}
+              onPress={() => navigation.navigate('DeckMain')}
             >
               <Back />
             </TouchableOpacity>
@@ -55,7 +62,7 @@ class DeckEdit extends Component {
 
                 addDeck({ title: inputTrim })
 
-                this.props.navigation.navigate(
+                navigation.navigate(
                   'DeckDetail',
                   { deckTitle: inputTrim }
                 )
@@ -77,6 +84,10 @@ class DeckEdit extends Component {
 function mapStateToProps ({ decks }) {
   return {
     deckTitles: Object.keys(decks).reduce((result, id) => {
+      if (decks[id] === null) {
+        console.log('------------------------------------')
+        console.log('hi')
+      }
       result.push(decks[id].title)
       return result
     }, [])
@@ -85,7 +96,8 @@ function mapStateToProps ({ decks }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    addDeck: (data) => dispatch(addDeck(data))
+    addDeck: (data) => dispatch(addDeck(data)),
+    editDeck: (data) => dispatch(editDeck(data)),
   }
 }
 

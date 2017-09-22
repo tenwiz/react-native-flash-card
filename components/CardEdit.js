@@ -8,14 +8,15 @@ import { Back, Check } from '../utils/icons'
 class CardEdit extends Component {
   render() {
     // Navigation
-    const { deckTitle } = this.props.navigation.state.params
+    const { navigation } = this.props
+    const { deckTitle } = navigation.state.params
 
     return (
       <View style={styles.container}>
 
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate(
+            onPress={() => navigation.navigate(
               'DeckDetail',
               { deckTitle }
             )}
@@ -24,7 +25,7 @@ class CardEdit extends Component {
           </TouchableOpacity>
           <Text style={styles.middle}>CARD</Text>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate(
+            onPress={() => navigation.navigate(
               'DeckDetail',
               { deckTitle }
             )}

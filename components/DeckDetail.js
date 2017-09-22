@@ -7,6 +7,9 @@ import { Back, CardAdd } from '../utils/icons'
 
 class DeckDetail extends Component {
   render() {
+    // Navigation
+    const { navigation } = this.props
+
     // Store
     const { deck } = this.props
 
@@ -17,13 +20,13 @@ class DeckDetail extends Component {
 
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('DeckMain')}
+            onPress={() => navigation.navigate('DeckMain')}
           >
             <Back />
           </TouchableOpacity>
           <Text style={styles.middle}>{barTitle}</Text>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate(
+            onPress={() => navigation.navigate(
               'CardEdit',
               { deckTitle: deck.title }
             )}

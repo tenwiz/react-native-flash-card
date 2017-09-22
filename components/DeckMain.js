@@ -26,8 +26,15 @@ class DeckMain extends Component {
       <Swipeable style={styles.list}
         rightButtons={[
           <View>
-            <TouchableOpacity><DeckEdit /></TouchableOpacity>
-            <TouchableOpacity><DeckRemove /></TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate(
+                'DeckEdit',
+                { operation: 'edit', deckTitle: item.title }
+              )}
+            ><DeckEdit /></TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {console.log('hi')}}
+            ><DeckRemove /></TouchableOpacity>
           </View>
         ]}
       >
@@ -45,6 +52,9 @@ class DeckMain extends Component {
   }
 
   render() {
+    // Navigation
+    const { navigation } = this.props
+
     // Store
     const { decks } = this.props
 
@@ -71,7 +81,10 @@ class DeckMain extends Component {
             onChangeText={(query) => { this.setState({ query }) }}
           />
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('DeckEdit')}
+            onPress={() => navigation.navigate(
+              'DeckEdit',
+              { operation: 'add' }
+            )}
           >
             <DeckAdd />
           </TouchableOpacity>

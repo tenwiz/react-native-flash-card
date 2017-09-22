@@ -1,12 +1,11 @@
 import {
   RECEIVE_DECKS,
   ADD_DECK,
+  EDIT_DECK,
 } from '../actions/Deck'
 
 function decks(state = {}, action) {
-  const { title } = action
-  console.log(title)
-  console.log(action)
+  const { title, oldTitle, newTitle } = action
 
   switch (action.type) {
     case RECEIVE_DECKS: {
@@ -20,6 +19,16 @@ function decks(state = {}, action) {
         ...state,
         [title]: {
           title,
+          questions: [],
+        }
+      }
+    }
+    case EDIT_DECK: {
+      return {
+        ...state,
+        [oldTitle]: null,
+        [newTitle]: {
+          title: newTitle,
           questions: [],
         }
       }
