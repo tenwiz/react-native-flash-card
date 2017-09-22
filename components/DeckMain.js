@@ -3,6 +3,7 @@ import { Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
+import Swipeable from 'react-native-swipeable'
 
 import { fetchFlashCardResults } from '../utils/api'
 import { styles } from '../utils/styles'
@@ -44,7 +45,7 @@ class DeckMain extends Component {
           <Search />
           <TextInput style={styles.search} placeholder='Search decks'
               value={query}
-              onChangeText={(query) => {this.setState({ query })}}
+              onChangeText={(query) => { this.setState({ query }) }}
             />
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('DeckEdit')}
@@ -54,23 +55,24 @@ class DeckMain extends Component {
         </View>
 
         {showingDecks.map(deck => (
-          <TouchableOpacity key={deck.title}
-            onPress={() => this.props.navigation.navigate(
-              'DeckDetail',
-              { deckTitle: deck.title }
-            )}
-          >
-            <View style={styles.deckMain}>
-              <View style={styles.deckText}>
-                <Text style={styles.deckTitle}>{deck.title}</Text>
-                <Text style={styles.deckBody}>{deck.questions.length} cards</Text>
-              </View>
-              <View>
-                <DeckEdit />
-                <DeckRemove />
-              </View>
-            </View>
-          </TouchableOpacity>
+          <Swipeable key={deck.title}
+              rightButtons={[
+                <View>
+                  <TouchableOpacity><DeckEdit /></TouchableOpacity>
+                  <TouchableOpacity><DeckRemove /></TouchableOpacity>
+                </View>
+              ]}
+            >
+            <TouchableOpacity style={styles.deckMain}
+              onPress={() => this.props.navigation.navigate(
+                'DeckDetail',
+                { deckTitle: deck.title }
+              )}
+            >
+              <Text style={styles.deckTitle}>{deck.title}</Text>
+              <Text style={styles.deckBody}>{deck.questions.length} cards</Text>
+            </TouchableOpacity>
+          </Swipeable>
         ))}
 
       </View>

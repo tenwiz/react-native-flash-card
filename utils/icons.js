@@ -5,13 +5,13 @@ import { styles } from './styles'
 
 export function Back() {
   return (
-    <Ionicons name='ios-arrow-back' size={50} />
+    <Ionicons style={styles.left} name='ios-arrow-back' size={50} />
   )
 }
 
 export function Check() {
   return (
-    <Ionicons name='md-checkmark' size={50} />
+    <Ionicons style={styles.right} name='md-checkmark' size={50} />
   )
 }
 
@@ -21,25 +21,25 @@ DeckMain
 
 export function Search() {
   return (
-    <Ionicons name='ios-search' size={50} />
+    <Ionicons style={styles.left} name='ios-search' size={50} />
   )
 }
 
 export function DeckAdd() {
   return (
-    <Ionicons name='ios-add' size={50} />
+    <Ionicons style={styles.right} name='ios-add' size={50} />
   )
 }
 
 export function DeckEdit() {
   return (
-    <FontAwesome style={styles.deckEdit} name='edit' size={20} />
+    <FontAwesome name='edit' size={50} />
   )
 }
 
 export function DeckRemove() {
   return (
-    <FontAwesome style={styles.deckRemove} name='trash-o' size={20} />
+    <FontAwesome name='trash-o' size={50} />
   )
 }
 
@@ -49,6 +49,6 @@ DeckDetail
 
 export function CardAdd() {
   return (
-    <Entypo style={styles.cardAdd} name='add-to-list' size={30} />
+    <Entypo style={styles.right} name='add-to-list' size={50} />
   )
 }

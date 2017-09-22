@@ -12,14 +12,6 @@ import CardEdit from './components/CardEdit'
 
 import reducer from './reducers'
 
-function AppStatusBar ({backgroundColor, ...props}) {
-  return (
-    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
-      <StatusBar backgroundColor={backgroundColor} {...props} />
-    </View>
-  )
-}
-
 const Navigator = StackNavigator({
   DeckMain: {
     screen: DeckMain,

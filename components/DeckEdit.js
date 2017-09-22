@@ -28,10 +28,9 @@ class DeckEdit extends Component {
             >
               <Back />
             </TouchableOpacity>
-            <Text style={styles.search}>Deck</Text>
+            <Text style={styles.middle}>Deck</Text>
             <TouchableOpacity
               onPress={() => {
-
                 if (deckTitles.indexOf(input) !== -1) {
                   Alert.alert(
                     'This name has been used',
@@ -56,9 +55,7 @@ class DeckEdit extends Component {
 
           <TextInput style={styles.deckName} placeholder='Deck Name'
               value={input}
-              onChangeText={(input) => {
-                this.setState({ input })
-              }}
+              onChangeText={(input) => { this.setState({ input }) }}
             />
         </View>
       )
