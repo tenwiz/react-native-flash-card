@@ -55,6 +55,9 @@ export const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 20,
   },
+  list: {
+    width
+  },
   deckMain: {
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, TouchableOpacity } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
@@ -19,6 +19,29 @@ class DeckMain extends Component {
   componentDidMount() {
     fetchFlashCardResults()
       .then(decks => this.props.receiveDecks(decks))
+  }
+
+  renderItem = ({ item }) => {
+    return (
+      <Swipeable style={styles.list}
+        rightButtons={[
+          <View>
+            <TouchableOpacity><DeckEdit /></TouchableOpacity>
+            <TouchableOpacity><DeckRemove /></TouchableOpacity>
+          </View>
+        ]}
+      >
+        <TouchableOpacity style={styles.deckMain}
+          onPress={() => this.props.navigation.navigate(
+            'DeckDetail',
+            { deckTitle: item.title }
+          )}
+        >
+          <Text style={styles.deckTitle}>{item.title}</Text>
+          <Text style={styles.deckBody}>{item.questions.length} cards</Text>
+        </TouchableOpacity>
+      </Swipeable>
+    )
   }
 
   render() {
@@ -44,9 +67,9 @@ class DeckMain extends Component {
         <View style={styles.header}>
           <Search />
           <TextInput style={styles.search} placeholder='Search decks'
-              value={query}
-              onChangeText={(query) => { this.setState({ query }) }}
-            />
+            value={query}
+            onChangeText={(query) => { this.setState({ query }) }}
+          />
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('DeckEdit')}
           >
@@ -54,26 +77,11 @@ class DeckMain extends Component {
           </TouchableOpacity>
         </View>
 
-        {showingDecks.map(deck => (
-          <Swipeable key={deck.title}
-              rightButtons={[
-                <View>
-                  <TouchableOpacity><DeckEdit /></TouchableOpacity>
-                  <TouchableOpacity><DeckRemove /></TouchableOpacity>
-                </View>
-              ]}
-            >
-            <TouchableOpacity style={styles.deckMain}
-              onPress={() => this.props.navigation.navigate(
-                'DeckDetail',
-                { deckTitle: deck.title }
-              )}
-            >
-              <Text style={styles.deckTitle}>{deck.title}</Text>
-              <Text style={styles.deckBody}>{deck.questions.length} cards</Text>
-            </TouchableOpacity>
-          </Swipeable>
-        ))}
+        <FlatList
+          data={showingDecks}
+          renderItem={this.renderItem}
+          keyExtractor={(item, index) => index}
+        />
 
       </View>
     )

@@ -66,9 +66,9 @@ class DeckEdit extends Component {
           </View>
 
           <TextInput style={styles.deckName} placeholder='Deck Name'
-              value={input}
-              onChangeText={(input) => { this.setState({ input }) }}
-            />
+            value={input}
+            onChangeText={(input) => { this.setState({ input }) }}
+          />
         </View>
       )
   }

@@ -32,7 +32,9 @@ class DeckDetail extends Component {
           </TouchableOpacity>
         </View>
 
-        <Text>hello</Text>
+        <View>
+          <Text>hello</Text>
+        </View>
 
       </View>
     )
