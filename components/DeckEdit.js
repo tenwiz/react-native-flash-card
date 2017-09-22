@@ -17,13 +17,9 @@ class DeckEdit extends Component {
       headerRight: (
         <TouchableOpacity
           onPress={() => {
-
             const { input, addDeck, deckTitles } = navigation.state.params
 
-            // console.log(input, deckTitles)
-
-            // console.log(deckTitles.indexOf(input))
-            if (deckTitles.indexOf(input) === 0) {
+            if (deckTitles.indexOf(input) !== -1) {
               Alert.alert(
                 'This name has been used',
                 null,
@@ -33,15 +29,12 @@ class DeckEdit extends Component {
               return
             }
 
-            console.log('hi')
+            addDeck({ title: input })
 
-
-            // addDeck({ title: input })
-
-            // navigation.navigate(
-            //   'DeckDetail',
-            //   { deckTitle: input }
-            // )
+            navigation.navigate(
+              'DeckDetail',
+              { deckTitle: input }
+            )
           }}
         >
           <Check />
@@ -53,8 +46,7 @@ class DeckEdit extends Component {
   componentDidMount() {
     const { addDeck, deckTitles } = this.props
 
-    this.props.navigation.setParams({ addDeck })
-    this.props.navigation.setParams({ deckTitles })
+    this.props.navigation.setParams({ addDeck, deckTitles })
   }
 
   render() {
