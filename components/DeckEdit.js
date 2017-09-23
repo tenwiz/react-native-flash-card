@@ -60,12 +60,14 @@ class DeckEdit extends Component {
                   return
                 }
 
-                addDeck({ title: inputTrim })
+                if (operation === 'add') {
+                  addDeck({ title: inputTrim })
 
-                navigation.navigate(
-                  'DeckDetail',
-                  { deckTitle: inputTrim }
-                )
+                  navigation.navigate(
+                    'DeckDetail',
+                    { deckTitle: inputTrim, key: navigation.state.key }
+                  )
+                }
               }}
             >
               <Check />

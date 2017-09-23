@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 
 import { styles } from '../utils/styles'
 import { Back, CardAdd } from '../utils/icons'
@@ -20,7 +21,9 @@ class DeckDetail extends Component {
 
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('DeckMain')}
+            onPress={() => {
+              navigation.goBack(navigation.state.params.key)
+            }}
           >
             <Back />
           </TouchableOpacity>
