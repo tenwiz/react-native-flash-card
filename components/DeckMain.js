@@ -140,10 +140,10 @@ class DeckMain extends Component {
 
 function mapStateToProps (decks) {
   return {
-    decks: Object.keys(decks).reduce((result, id) => {
+    decks: (Object.keys(decks).reduce((result, id) => {
       result.push(decks[id])
       return result
-    }, [])
+    }, [])).reverse()
   }
 }
 

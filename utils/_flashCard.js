@@ -4,52 +4,8 @@ export const FLASHCARD_STORAGE_KEY = 'flashCard'
 
 export function setDummyData() {
   const dummyData = {
-    React: {
-      title: 'React',
-      questions: [
-        {
-          question: 'What is React?',
-          answer: 'A library for managing user interfaces'
-        },
-        {
-          question: 'Where do you make Ajax requests in React? Where do you make Ajax requests in React? Where do you make Ajax requests in React?',
-          answer: 'The componentDidMount lifecycle event'
-        }
-      ]
-    },
-    JavaScript: {
-      title: 'JavaScript',
-      questions: [
-        {
-          question: 'What is a closure?',
-          answer: 'The combination of a function and the lexical environment within which that function was declared.'
-        }
-      ]
-    },
-    TestA: {
-      title: 'TestA',
-      questions: [
-        {
-          question: 'What is React?',
-          answer: 'A library for managing user interfaces'
-        },
-        {
-          question: 'Where do you make Ajax requests in React?',
-          answer: 'The componentDidMount lifecycle event'
-        }
-      ]
-    },
-    TestB: {
-      title: 'TestB',
-      questions: [
-        {
-          question: 'What is a closure?',
-          answer: 'The combination of a function and the lexical environment within which that function was declared.'
-        }
-      ]
-    },
-    TestC: {
-      title: 'TestC',
+    TestE: {
+      title: 'TestE',
       questions: [
         {
           question: 'What is React?',
@@ -70,8 +26,8 @@ export function setDummyData() {
         }
       ]
     },
-    TestE: {
-      title: 'TestE',
+    TestC: {
+      title: 'TestC',
       questions: [
         {
           question: 'What is React?',
@@ -79,6 +35,50 @@ export function setDummyData() {
         },
         {
           question: 'Where do you make Ajax requests in React?',
+          answer: 'The componentDidMount lifecycle event'
+        }
+      ]
+    },
+    TestB: {
+      title: 'TestB',
+      questions: [
+        {
+          question: 'What is a closure?',
+          answer: 'The combination of a function and the lexical environment within which that function was declared.'
+        }
+      ]
+    },
+    TestA: {
+      title: 'TestA',
+      questions: [
+        {
+          question: 'What is React?',
+          answer: 'A library for managing user interfaces'
+        },
+        {
+          question: 'Where do you make Ajax requests in React?',
+          answer: 'The componentDidMount lifecycle event'
+        }
+      ]
+    },
+    JavaScript: {
+      title: 'JavaScript',
+      questions: [
+        {
+          question: 'What is a closure?',
+          answer: 'The combination of a function and the lexical environment within which that function was declared.'
+        }
+      ]
+    },
+    React: {
+      title: 'React',
+      questions: [
+        {
+          question: 'What is React?',
+          answer: 'A library for managing user interfaces'
+        },
+        {
+          question: 'Where do you make Ajax requests in React? Where do you make Ajax requests in React? Where do you make Ajax requests in React?',
           answer: 'The componentDidMount lifecycle event'
         }
       ]
