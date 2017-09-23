@@ -138,7 +138,7 @@ class DeckMain extends Component {
   }
 }
 
-function mapStateToProps ({ decks }) {
+function mapStateToProps (decks) {
   return {
     decks: Object.keys(decks).reduce((result, id) => {
       result.push(decks[id])

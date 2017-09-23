@@ -128,7 +128,7 @@ class DeckDetail extends Component {
   }
 }
 
-function mapStateToProps ({ decks }, { navigation }) {
+function mapStateToProps ( decks, { navigation }) {
   const { deckTitle } = navigation.state.params
 
   return {

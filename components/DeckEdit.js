@@ -82,7 +82,7 @@ class DeckEdit extends Component {
   }
 }
 
-function mapStateToProps ({ decks }) {
+function mapStateToProps (decks) {
   return {
     deckTitles: Object.keys(decks).reduce((result, id) => {
       result.push(decks[id].title)
