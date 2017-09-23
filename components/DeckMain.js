@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
@@ -54,7 +54,15 @@ class DeckMain extends Component {
                 onPress={() => {
                   this.closeSwipeable()
 
-                  this.props.removeDeck({ title: item.title })
+                  Alert.alert(
+                    'Are you sure you want to delete this deck and all of its cards?',
+                    null,
+                    [
+                      {text: 'Cancel'},
+                      {text: 'OK', onPress: () => this.props.removeDeck({ title: item.title })},
+                    ],
+                    { cancelable: false }
+                  )
                 }}
               >
                 <DeckRemove />
