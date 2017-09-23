@@ -31,55 +31,58 @@ class DeckMain extends Component {
   }
 
   renderItem = ({ item }) => {
-    const {currentlyOpenSwipeable} = this.state
-    const itemProps = {
-      onOpen: (event, gestureState, swipeable) => {
-        if (currentlyOpenSwipeable && currentlyOpenSwipeable !== swipeable) {
-          currentlyOpenSwipeable.recenter()
-        }
+    if (item.title !== null) {
+      const {currentlyOpenSwipeable} = this.state
+      const itemProps = {
+        onOpen: (event, gestureState, swipeable) => {
+          if (currentlyOpenSwipeable && currentlyOpenSwipeable !== swipeable) {
+            currentlyOpenSwipeable.recenter()
+          }
 
-        this.setState({currentlyOpenSwipeable: swipeable})
-      },
-      onClose: () => this.setState({currentlyOpenSwipeable: null}),
-    }
+          this.setState({currentlyOpenSwipeable: swipeable})
+        },
+        onClose: () => this.setState({currentlyOpenSwipeable: null}),
+      }
 
-    return (
-      <Swipeable style={styles.list}
-        onRightButtonsOpenRelease={itemProps.onOpen}
-        onRightButtonsCloseRelease={itemProps.onClose}
-        rightButtons={[
-          <View>
-            <TouchableOpacity
-              onPress={() => {
-                this.closeSwipeable()
 
-                this.props.navigation.navigate(
-                  'DeckEdit',
-                  { operation: 'edit', deckTitle: item.title }
-                )
-              }}
-            >
-              <DeckEdit />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {console.log('hi')}}
-            >
-              <DeckRemove />
-            </TouchableOpacity>
-          </View>
-        ]}
-      >
-        <TouchableOpacity style={styles.deckMain}
-          onPress={() => this.props.navigation.navigate(
-            'DeckDetail',
-            { deckTitle: item.title }
-          )}
+      return (
+        <Swipeable style={styles.list}
+          onRightButtonsOpenRelease={itemProps.onOpen}
+          onRightButtonsCloseRelease={itemProps.onClose}
+          rightButtons={[
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  this.closeSwipeable()
+
+                  this.props.navigation.navigate(
+                    'DeckEdit',
+                    { operation: 'edit', oldTitle: item.title }
+                  )
+                }}
+              >
+                <DeckEdit />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {console.log('hi')}}
+              >
+                <DeckRemove />
+              </TouchableOpacity>
+            </View>
+          ]}
         >
-          <Text style={styles.deckTitle}>{item.title}</Text>
-          <Text style={styles.deckBody}>{item.questions.length} cards</Text>
-        </TouchableOpacity>
-      </Swipeable>
-    )
+          <TouchableOpacity style={styles.deckMain}
+            onPress={() => this.props.navigation.navigate(
+              'DeckDetail',
+              { deckTitle: item.title }
+            )}
+          >
+            <Text style={styles.deckTitle}>{item.title}</Text>
+            <Text style={styles.deckBody}>{item.questions.length} cards</Text>
+          </TouchableOpacity>
+        </Swipeable>
+      )
+    }
   }
 
   render() {
@@ -101,6 +104,8 @@ class DeckMain extends Component {
     }
 
     showingDecks.sort(sortBy('name'))
+
+    console.log(showingDecks)
 
     return (
       <View style={styles.container}>

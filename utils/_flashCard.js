@@ -83,15 +83,6 @@ export function setDummyData() {
         }
       ]
     },
-    TestF: {
-      title: 'TestF',
-      questions: [
-        {
-          question: 'What is a closure?',
-          answer: 'The combination of a function and the lexical environment within which that function was declared.'
-        }
-      ]
-    },
   }
 
   AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(dummyData))

@@ -26,10 +26,12 @@ function decks(state = {}, action) {
     case EDIT_DECK: {
       return {
         ...state,
-        [oldTitle]: null,
+        [oldTitle]: {
+          title: null,
+        },
         [newTitle]: {
           title: newTitle,
-          questions: [],
+          questions: state[oldTitle].questions,
         }
       }
     }

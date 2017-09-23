@@ -15,16 +15,13 @@ class DeckEdit extends Component {
   render() {
     // Navigation
     const { navigation } = this.props
-    const { operation } = navigation.state.params
+    const { operation, oldTitle } = navigation.state.params
 
     // Store
     const { addDeck, editDeck, deckTitles } = this.props
 
     // State
     const { input } = this.state
-
-    console.log('------------------------------------')
-    console.log(operation)
 
     return (
         <View style={styles.container}>
@@ -62,12 +59,14 @@ class DeckEdit extends Component {
 
                 if (operation === 'add') {
                   addDeck({ title: inputTrim })
-
-                  navigation.navigate(
-                    'DeckDetail',
-                    { deckTitle: inputTrim, key: navigation.state.key }
-                  )
+                } else if (operation === 'edit') {
+                  editDeck({ oldTitle, newTitle: inputTrim })
                 }
+
+                navigation.navigate(
+                  'DeckDetail',
+                  { deckTitle: inputTrim, key: navigation.state.key }
+                )
               }}
             >
               <Check />
@@ -86,10 +85,6 @@ class DeckEdit extends Component {
 function mapStateToProps ({ decks }) {
   return {
     deckTitles: Object.keys(decks).reduce((result, id) => {
-      if (decks[id] === null) {
-        console.log('------------------------------------')
-        console.log('hi')
-      }
       result.push(decks[id].title)
       return result
     }, [])
