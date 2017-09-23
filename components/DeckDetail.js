@@ -60,13 +60,13 @@ class DeckDetail extends Component {
             </View>
           ]}
         >
-          <TouchableOpacity style={styles.deckMain}
+          <TouchableOpacity style={styles.card}
             // onPress={() => this.props.navigation.navigate(
             //   'DeckDetail',
             //   { deckTitle: item.title }
             // )}
           >
-            <Text style={styles.question}>{this.trim(item.question)}</Text>
+            <Text style={styles.cardTitle}>{this.trim(item.question)}</Text>
           </TouchableOpacity>
         </Swipeable>
       )

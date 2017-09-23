@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 
 import { styles } from '../utils/styles'
 import { Back, Check } from '../utils/icons'
 
 class CardEdit extends Component {
+  state = {
+    question: '',
+    answer: '',
+  }
+
   render() {
     // Navigation
     const { navigation } = this.props
     // const { deckTitle } = navigation.state.params
+
+    // State
+    const { question, answer } = this.state
 
     return (
       <View style={styles.container}>
@@ -28,7 +36,17 @@ class CardEdit extends Component {
           </TouchableOpacity>
         </View>
 
-        <Text>hello</Text>
+        <View>
+          <TextInput style={styles.question} placeholder='Question'
+            value={question}
+            onChangeText={(input) => { this.setState({ question: input }) }}
+          />
+          <TextInput style={styles.answer} placeholder='Answer'
+            value={answer}
+            onChangeText={(input) => { this.setState({ answer: input }) }}
+            multiline = {true}
+          />
+        </View>
 
       </View>
     )

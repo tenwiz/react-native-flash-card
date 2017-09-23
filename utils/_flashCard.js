@@ -12,7 +12,7 @@ export function setDummyData() {
           answer: 'A library for managing user interfaces'
         },
         {
-          question: 'Where do you make Ajax requests in React?Where do you make Ajax requests in React?Where do you make Ajax requests in React?',
+          question: 'Where do you make Ajax requests in React? Where do you make Ajax requests in React? Where do you make Ajax requests in React?',
           answer: 'The componentDidMount lifecycle event'
         }
       ]

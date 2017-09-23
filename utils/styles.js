@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native'
 import { Constants } from 'expo'
 
-export const { width } = Dimensions.get('window')
+export const { width, height } = Dimensions.get('window')
 
 export const styles = StyleSheet.create({
   statusBar: {
@@ -15,6 +15,17 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#FAFAFA',
+  },
+  header: {
+    width,
+    flexDirection: 'row',
+    backgroundColor: '#F5F5F5',
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      height: 3,
+      width: 0,
+    },
+    marginBottom: 10,
   },
   left: {
     marginLeft: 5,
@@ -33,32 +44,7 @@ export const styles = StyleSheet.create({
     width: 50,
     textAlign: 'center',
   },
-
-  /*
-  DeckMain
-  */
-
-  header: {
-    width,
-    flexDirection: 'row',
-    backgroundColor: '#F5F5F5',
-    shadowOpacity: 0.3,
-    shadowOffset: {
-      height: 3,
-      width: 0,
-    },
-    marginBottom: 10,
-  },
-  search: {
-    width: width - 115,
-    marginLeft: 5,
-    marginTop: 5,
-    fontSize: 20,
-  },
-  list: {
-    width
-  },
-  deckMain: {
+  card: {
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
@@ -71,6 +57,20 @@ export const styles = StyleSheet.create({
     height: 100,
     marginBottom: 10,
     marginLeft: 10,
+  },
+
+  /*
+  DeckMain
+  */
+
+  search: {
+    width: width - 115,
+    marginLeft: 5,
+    marginTop: 5,
+    fontSize: 20,
+  },
+  list: {
+    width
   },
   deckTitle: {
     fontSize: 30,
@@ -98,9 +98,29 @@ export const styles = StyleSheet.create({
   /*
   DeckDetail
   */
-  question: {
+
+  cardTitle: {
     fontSize: 20,
     textAlign: 'center',
     width: width - 40,
+  },
+
+  /*
+  DeckDetail
+  */
+
+  question: {
+    width: width - 20,
+    height: 50,
+    padding: 5,
+    borderBottomWidth: 1,
+    fontSize: 20,
+  },
+  answer: {
+    width: width - 20,
+    height: 500,
+    padding: 5,
+    marginTop: 10,
+    fontSize: 20,
   },
 })
