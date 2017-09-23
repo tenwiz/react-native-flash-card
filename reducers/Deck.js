@@ -2,6 +2,7 @@ import {
   RECEIVE_DECKS,
   ADD_DECK,
   EDIT_DECK,
+  REMOVE_DECK,
 } from '../actions/Deck'
 
 function decks(state = {}, action) {
@@ -32,6 +33,14 @@ function decks(state = {}, action) {
         [newTitle]: {
           title: newTitle,
           questions: state[oldTitle].questions,
+        }
+      }
+    }
+    case REMOVE_DECK: {
+      return {
+        ...state,
+        [title]: {
+          title: null,
         }
       }
     }

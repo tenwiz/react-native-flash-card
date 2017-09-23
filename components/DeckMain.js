@@ -9,7 +9,7 @@ import { fetchFlashCardResults } from '../utils/api'
 import { styles } from '../utils/styles'
 import { Search, DeckAdd, DeckEdit, DeckRemove } from '../utils/icons'
 
-import { receiveDecks } from '../actions/Deck'
+import { receiveDecks, removeDeck } from '../actions/Deck'
 
 class DeckMain extends Component {
   state = {
@@ -30,21 +30,8 @@ class DeckMain extends Component {
     }
   }
 
-  renderItem = ({ item }) => {
+  renderItem = ({ item, itemProps }) => {
     if (item.title !== null) {
-      const {currentlyOpenSwipeable} = this.state
-      const itemProps = {
-        onOpen: (event, gestureState, swipeable) => {
-          if (currentlyOpenSwipeable && currentlyOpenSwipeable !== swipeable) {
-            currentlyOpenSwipeable.recenter()
-          }
-
-          this.setState({currentlyOpenSwipeable: swipeable})
-        },
-        onClose: () => this.setState({currentlyOpenSwipeable: null}),
-      }
-
-
       return (
         <Swipeable style={styles.list}
           onRightButtonsOpenRelease={itemProps.onOpen}
@@ -64,7 +51,11 @@ class DeckMain extends Component {
                 <DeckEdit />
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => {console.log('hi')}}
+                onPress={() => {
+                  this.closeSwipeable()
+
+                  this.props.removeDeck({ title: item.title })
+                }}
               >
                 <DeckRemove />
               </TouchableOpacity>
@@ -93,7 +84,17 @@ class DeckMain extends Component {
     const { decks } = this.props
 
     // State
-    const { query } = this.state
+    const { query, currentlyOpenSwipeable } = this.state
+
+    const itemProps = {
+      onOpen: (event, gestureState, swipeable) => {
+        if (currentlyOpenSwipeable && currentlyOpenSwipeable !== swipeable) {
+          currentlyOpenSwipeable.recenter()
+        }
+        this.setState({currentlyOpenSwipeable: swipeable})
+      },
+      onClose: () => this.setState({currentlyOpenSwipeable: null}),
+    }
 
     let showingDecks
     if (query) {
@@ -104,8 +105,6 @@ class DeckMain extends Component {
     }
 
     showingDecks.sort(sortBy('name'))
-
-    console.log(showingDecks)
 
     return (
       <View style={styles.container}>
@@ -128,7 +127,7 @@ class DeckMain extends Component {
 
         <FlatList
           data={showingDecks}
-          renderItem={this.renderItem}
+          renderItem={({ item }) => this.renderItem({ item, itemProps })}
           keyExtractor={(item, index) => index}
         />
 
@@ -148,7 +147,8 @@ function mapStateToProps ({ decks }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    receiveDecks: (data) => dispatch(receiveDecks(data))
+    receiveDecks: (data) => dispatch(receiveDecks(data)),
+    removeDeck: (data) => dispatch(removeDeck(data)),
   }
 }
 
