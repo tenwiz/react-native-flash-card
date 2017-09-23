@@ -43,16 +43,6 @@ class DeckDetail extends Component {
               <TouchableOpacity
                 onPress={() => {
                   closeSwipeable(this.state.currentlyOpenSwipeable)
-
-                  // Alert.alert(
-                  //   'Are you sure you want to delete this deck and all of its cards?',
-                  //   null,
-                  //   [
-                  //     {text: 'Cancel'},
-                  //     {text: 'OK', onPress: () => this.props.removeDeck({ title: item.title })},
-                  //   ],
-                  //   { cancelable: false }
-                  // )
                 }}
               >
                 <Remove />

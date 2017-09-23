@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, TextInput } from 'react-native'
+import { Text, View, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { connect } from 'react-redux'
 
 import { styles } from '../utils/styles'
@@ -19,7 +19,7 @@ class CardEdit extends Component {
     const { deckTitle } = navigation.state.params
 
     // Store
-    const { addCard } = this.props
+    const { addCard, questions } = this.props
 
     // State
     const { question, answer } = this.state
@@ -36,8 +36,31 @@ class CardEdit extends Component {
           <Text style={styles.middle}>CARD</Text>
           <TouchableOpacity
             onPress={() => {
-              addCard({ title: deckTitle, question, answer })
-              navigation.goBack()
+              const questionTrim = question.trim()
+              const answerTrim = answer.trim()
+
+              if (questionTrim === '' || answerTrim === '') {
+                Alert.alert(
+                  'Question or answer cannot be blank',
+                  null,
+                  [{text: 'OK'}],
+                  { cancelable: false }
+                )
+                return
+              }
+
+              if (questions.indexOf(questionTrim) !== -1) {
+                Alert.alert(
+                  'This question has been asked',
+                  null,
+                  [{text: 'OK'}],
+                  { cancelable: false }
+                )
+                return
+              }
+
+              // addCard({ title: deckTitle, question, answer })
+              // navigation.goBack()
             }}
           >
             <Check />
@@ -61,8 +84,15 @@ class CardEdit extends Component {
   }
 }
 
-function mapStateToProps () {
-  return {}
+function mapStateToProps (decks, { navigation }) {
+  const { deckTitle } = navigation.state.params
+
+  return {
+    questions: decks[deckTitle].questions.reduce((result, current) => {
+      result.push(current.question)
+      return result
+    }, [])
+  }
 }
 
 function mapDispatchToProps (dispatch) {
