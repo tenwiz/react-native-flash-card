@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
@@ -7,6 +7,10 @@ import { styles } from '../utils/styles'
 import { Back, CardAdd } from '../utils/icons'
 
 class DeckDetail extends Component {
+  state = {
+    currentlyOpenSwipeable: null,
+  }
+
   render() {
     // Navigation
     const { navigation } = this.props
@@ -14,7 +18,20 @@ class DeckDetail extends Component {
     // Store
     const { deck } = this.props
 
+    // State
+    const { currentlyOpenSwipeable } = this.state
+
     const barTitle = `${deck.title} (${deck.questions.length})`
+
+    const itemProps = {
+      onOpen: (event, gestureState, swipeable) => {
+        if (currentlyOpenSwipeable && currentlyOpenSwipeable !== swipeable) {
+          currentlyOpenSwipeable.recenter()
+        }
+        this.setState({currentlyOpenSwipeable: swipeable})
+      },
+      onClose: () => this.setState({currentlyOpenSwipeable: null}),
+    }
 
     return (
       <View style={styles.container}>
@@ -36,10 +53,6 @@ class DeckDetail extends Component {
           >
             <CardAdd />
           </TouchableOpacity>
-        </View>
-
-        <View>
-          <Text>hello</Text>
         </View>
 
       </View>

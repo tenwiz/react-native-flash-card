@@ -8,6 +8,7 @@ import Swipeable from 'react-native-swipeable'
 import { fetchFlashCardResults } from '../utils/api'
 import { styles } from '../utils/styles'
 import { Search, DeckAdd, DeckEdit, DeckRemove } from '../utils/icons'
+import { closeSwipeable } from '../utils/swipeable'
 
 import { receiveDecks, removeDeck } from '../actions/Deck'
 
@@ -22,14 +23,6 @@ class DeckMain extends Component {
       .then(decks => this.props.receiveDecks(decks))
   }
 
-  closeSwipeable = () => {
-    const {currentlyOpenSwipeable} = this.state
-
-    if (currentlyOpenSwipeable) {
-      currentlyOpenSwipeable.recenter()
-    }
-  }
-
   renderItem = ({ item, itemProps }) => {
     if (item.title !== null) {
       return (
@@ -40,7 +33,7 @@ class DeckMain extends Component {
             <View>
               <TouchableOpacity
                 onPress={() => {
-                  this.closeSwipeable()
+                  closeSwipeable(this.state.currentlyOpenSwipeable)
 
                   this.props.navigation.navigate(
                     'DeckEdit',
@@ -52,7 +45,7 @@ class DeckMain extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  this.closeSwipeable()
+                  closeSwipeable(this.state.currentlyOpenSwipeable)
 
                   Alert.alert(
                     'Are you sure you want to delete this deck and all of its cards?',
