@@ -5,8 +5,12 @@ import {
   REMOVE_DECK,
 } from '../actions/Deck'
 
+import {
+  ADD_CARD,
+} from '../actions/Card'
+
 function decks(state = {}, action) {
-  const { title, oldTitle, newTitle } = action
+  const { title, oldTitle, newTitle, question, answer } = action
 
   switch (action.type) {
     case RECEIVE_DECKS: {
@@ -41,6 +45,15 @@ function decks(state = {}, action) {
         ...state,
         [title]: {
           title: null,
+        }
+      }
+    }
+    case ADD_CARD: {
+      return {
+        ...state,
+        [title]: {
+          title,
+          questions: [{ question, answer }, ...state[title].questions]
         }
       }
     }

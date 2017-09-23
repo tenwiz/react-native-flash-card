@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { styles } from '../utils/styles'
 import { Back, Check } from '../utils/icons'
 
+import { addCard } from '../actions/Card'
+
 class CardEdit extends Component {
   state = {
     question: '',
@@ -14,7 +16,10 @@ class CardEdit extends Component {
   render() {
     // Navigation
     const { navigation } = this.props
-    // const { deckTitle } = navigation.state.params
+    const { deckTitle } = navigation.state.params
+
+    // Store
+    const { addCard } = this.props
 
     // State
     const { question, answer } = this.state
@@ -30,7 +35,10 @@ class CardEdit extends Component {
           </TouchableOpacity>
           <Text style={styles.middle}>CARD</Text>
           <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              addCard({ title: deckTitle, question, answer })
+              navigation.goBack()
+            }}
           >
             <Check />
           </TouchableOpacity>
@@ -57,8 +65,10 @@ function mapStateToProps () {
   return {}
 }
 
-function mapDispatchToProps () {
-  return {}
+function mapDispatchToProps (dispatch) {
+  return {
+    addCard: (data) => dispatch(addCard(data)),
+  }
 }
 
 export default connect(
