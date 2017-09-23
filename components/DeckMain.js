@@ -7,7 +7,7 @@ import Swipeable from 'react-native-swipeable'
 
 import { fetchFlashCardResults } from '../utils/api'
 import { styles } from '../utils/styles'
-import { Search, DeckAdd, DeckEdit, DeckRemove } from '../utils/icons'
+import { Search, DeckAdd, Edit, Remove } from '../utils/icons'
 import { closeSwipeable } from '../utils/swipeable'
 
 import { receiveDecks, removeDeck } from '../actions/Deck'
@@ -29,6 +29,7 @@ class DeckMain extends Component {
         <Swipeable style={styles.list}
           onRightButtonsOpenRelease={itemProps.onOpen}
           onRightButtonsCloseRelease={itemProps.onClose}
+          rightButtonWidth={60}
           rightButtons={[
             <View>
               <TouchableOpacity
@@ -41,7 +42,7 @@ class DeckMain extends Component {
                   )
                 }}
               >
-                <DeckEdit />
+                <Edit />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -58,7 +59,7 @@ class DeckMain extends Component {
                   )
                 }}
               >
-                <DeckRemove />
+                <Remove />
               </TouchableOpacity>
             </View>
           ]}

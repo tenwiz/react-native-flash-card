@@ -2,13 +2,75 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
+import Swipeable from 'react-native-swipeable'
 
 import { styles } from '../utils/styles'
-import { Back, CardAdd } from '../utils/icons'
+import { Back, CardAdd, Edit, Remove } from '../utils/icons'
+import { closeSwipeable } from '../utils/swipeable'
 
 class DeckDetail extends Component {
   state = {
     currentlyOpenSwipeable: null,
+  }
+
+  trim = (str) => {
+    return str.length > 100
+      ? str.slice(0, 100) + '...'
+      : str
+  }
+
+  renderItem = ({ item, itemProps }) => {
+    // if (item.title !== null) {
+      return (
+        <Swipeable style={styles.list}
+          onRightButtonsOpenRelease={itemProps.onOpen}
+          onRightButtonsCloseRelease={itemProps.onClose}
+          rightButtonWidth={60}
+          rightButtons={[
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  closeSwipeable(this.state.currentlyOpenSwipeable)
+
+                  // this.props.navigation.navigate(
+                  //   'DeckEdit',
+                  //   { operation: 'edit', oldTitle: item.title }
+                  // )
+                }}
+              >
+                <Edit />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  closeSwipeable(this.state.currentlyOpenSwipeable)
+
+                  // Alert.alert(
+                  //   'Are you sure you want to delete this deck and all of its cards?',
+                  //   null,
+                  //   [
+                  //     {text: 'Cancel'},
+                  //     {text: 'OK', onPress: () => this.props.removeDeck({ title: item.title })},
+                  //   ],
+                  //   { cancelable: false }
+                  // )
+                }}
+              >
+                <Remove />
+              </TouchableOpacity>
+            </View>
+          ]}
+        >
+          <TouchableOpacity style={styles.deckMain}
+            // onPress={() => this.props.navigation.navigate(
+            //   'DeckDetail',
+            //   { deckTitle: item.title }
+            // )}
+          >
+            <Text style={styles.question}>{this.trim(item.question)}</Text>
+          </TouchableOpacity>
+        </Swipeable>
+      )
+    // }
   }
 
   render() {
@@ -54,6 +116,12 @@ class DeckDetail extends Component {
             <CardAdd />
           </TouchableOpacity>
         </View>
+
+        <FlatList
+          data={deck.questions}
+          renderItem={({ item }) => this.renderItem({ item, itemProps })}
+          keyExtractor={(item, index) => index}
+        />
 
       </View>
     )

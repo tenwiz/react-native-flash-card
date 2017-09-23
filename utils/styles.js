@@ -98,4 +98,9 @@ export const styles = StyleSheet.create({
   /*
   DeckDetail
   */
+  question: {
+    fontSize: 20,
+    textAlign: 'center',
+    width: width - 40,
+  },
 })

@@ -15,6 +15,18 @@ export function Check() {
   )
 }
 
+export function Edit() {
+  return (
+    <FontAwesome name='edit' size={50} />
+  )
+}
+
+export function Remove() {
+  return (
+    <FontAwesome name='trash-o' size={50} />
+  )
+}
+
 /*
 DeckMain
 */
@@ -28,18 +40,6 @@ export function Search() {
 export function DeckAdd() {
   return (
     <Ionicons style={styles.right} name='ios-add' size={50} />
-  )
-}
-
-export function DeckEdit() {
-  return (
-    <FontAwesome name='edit' size={50} />
-  )
-}
-
-export function DeckRemove() {
-  return (
-    <FontAwesome name='trash-o' size={50} />
   )
 }
 
