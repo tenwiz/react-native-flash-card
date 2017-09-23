@@ -8,6 +8,8 @@ import { styles } from '../utils/styles'
 import { Back, CardAdd, Edit, Remove } from '../utils/icons'
 import { closeSwipeable } from '../utils/swipeable'
 
+import { removeCard } from '../actions/Card'
+
 class DeckDetail extends Component {
   state = {
     currentlyOpenSwipeable: null,
@@ -43,6 +45,8 @@ class DeckDetail extends Component {
               <TouchableOpacity
                 onPress={() => {
                   closeSwipeable(this.state.currentlyOpenSwipeable)
+
+                  this.props.removeCard({ title: deckTitle, question: item.question })
                 }}
               >
                 <Remove />
@@ -126,8 +130,10 @@ function mapStateToProps ( decks, { navigation }) {
   }
 }
 
-function mapDispatchToProps () {
-  return {}
+function mapDispatchToProps (dispatch) {
+  return {
+    removeCard: (data) => dispatch(removeCard(data)),
+  }
 }
 
 export default connect(

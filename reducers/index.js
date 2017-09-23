@@ -8,6 +8,7 @@ import {
 import {
   ADD_CARD,
   EDIT_CARD,
+  REMOVE_CARD,
 } from '../actions/Card'
 
 function decks(state = {}, action) {
@@ -64,6 +65,15 @@ function decks(state = {}, action) {
         [title]: {
           title,
           questions: [{ question: newQuestion, answer: newAnswer }, ...state[title].questions.filter(item => item.question !== oldQuestion)]
+        }
+      }
+    }
+    case REMOVE_CARD: {
+      return {
+        ...state,
+        [title]: {
+          title,
+          questions: [...state[title].questions.filter(item => item.question !== question)]
         }
       }
     }

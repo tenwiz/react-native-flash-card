@@ -1,5 +1,6 @@
 export const ADD_CARD = 'ADD_CARD'
 export const EDIT_CARD = 'EDIT_CARD'
+export const REMOVE_CARD = 'REMOVE_CARD'
 
 export function addCard({ title, question, answer }) {
   return {
@@ -17,5 +18,13 @@ export function editCard({ title, oldQuestion, newQuestion, newAnswer }) {
     oldQuestion,
     newQuestion,
     newAnswer,
+  }
+}
+
+export function removeCard({ title, question }) {
+  return {
+    type: REMOVE_CARD,
+    title,
+    question,
   }
 }
