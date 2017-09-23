@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { styles } from '../utils/styles'
 import { Back, Check } from '../utils/icons'
 
-import { addCard } from '../actions/Card'
+import { addCard, editCard } from '../actions/Card'
 
 class CardEdit extends Component {
   state = {
@@ -13,13 +13,21 @@ class CardEdit extends Component {
     answer: '',
   }
 
+  componentDidMount() {
+    const { operation, oldQuestion, oldAnswer } = this.props.navigation.state.params
+
+    if (operation === 'edit') {
+      this.setState({ question: oldQuestion, answer: oldAnswer })
+    }
+  }
+
   render() {
     // Navigation
     const { navigation } = this.props
-    const { deckTitle } = navigation.state.params
+    const { operation, deckTitle, oldQuestion } = navigation.state.params
 
     // Store
-    const { addCard, questions } = this.props
+    const { addCard, editCard, questions } = this.props
 
     // State
     const { question, answer } = this.state
@@ -49,9 +57,9 @@ class CardEdit extends Component {
                 return
               }
 
-              if (questions.indexOf(questionTrim) !== -1) {
+              if (questions.indexOf(questionTrim) !== -1 && questionTrim !== oldQuestion) {
                 Alert.alert(
-                  'This question has been asked',
+                  'This question has been added',
                   null,
                   [{text: 'OK'}],
                   { cancelable: false }
@@ -59,8 +67,13 @@ class CardEdit extends Component {
                 return
               }
 
-              // addCard({ title: deckTitle, question, answer })
-              // navigation.goBack()
+              if (operation === 'add') {
+                addCard({ title: deckTitle, question: questionTrim, answer: answerTrim })
+              } else if (operation === 'edit') {
+                editCard({ title: deckTitle, oldQuestion, newQuestion: questionTrim, newAnswer: answerTrim })
+              }
+
+              navigation.goBack()
             }}
           >
             <Check />
@@ -98,6 +111,7 @@ function mapStateToProps (decks, { navigation }) {
 function mapDispatchToProps (dispatch) {
   return {
     addCard: (data) => dispatch(addCard(data)),
+    editCard: (data) => dispatch(editCard(data)),
   }
 }
 

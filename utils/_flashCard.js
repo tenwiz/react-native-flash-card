@@ -78,11 +78,31 @@ export function setDummyData() {
           answer: 'A library for managing user interfaces'
         },
         {
-          question: 'Where do you make Ajax requests in React? Where do you make Ajax requests in React? Where do you make Ajax requests in React?',
+          question: 'Where do you make Ajax requests in React?',
           answer: 'The componentDidMount lifecycle event'
+        },
+        {
+          question: 'TestA',
+          answer: 'A library for managing user interfaces'
+        },
+        {
+          question: 'TestB',
+          answer: 'The componentDidMount lifecycle event'
+        },
+        {
+          question: 'TestC',
+          answer: 'A library for managing user interfaces'
+        },
+        {
+          question: 'TestD',
+          answer: 'The componentDidMount lifecycle event'
+        },
+        {
+          question: 'TestE',
+          answer: 'A library for managing user interfaces'
         }
       ]
-    },
+    }
   }
 
   AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(dummyData))

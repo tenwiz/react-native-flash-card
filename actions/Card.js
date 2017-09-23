@@ -1,5 +1,5 @@
 export const ADD_CARD = 'ADD_CARD'
-export const OBSOLETE = 'OBSOLETE'
+export const EDIT_CARD = 'EDIT_CARD'
 
 export function addCard({ title, question, answer }) {
   return {
@@ -10,11 +10,12 @@ export function addCard({ title, question, answer }) {
   }
 }
 
-export function obsolete({ title, question, answer }) {
+export function editCard({ title, oldQuestion, newQuestion, newAnswer }) {
   return {
-    type: OBSOLETE,
+    type: EDIT_CARD,
     title,
-    question,
-    answer,
+    oldQuestion,
+    newQuestion,
+    newAnswer,
   }
 }

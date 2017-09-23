@@ -12,6 +12,14 @@ class DeckEdit extends Component {
     input: '',
   }
 
+  componentDidMount() {
+    const { operation, oldTitle } = this.props.navigation.state.params
+
+    if (operation === 'edit') {
+      this.setState({ input: oldTitle })
+    }
+  }
+
   render() {
     // Navigation
     const { navigation } = this.props

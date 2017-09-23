@@ -7,10 +7,11 @@ import {
 
 import {
   ADD_CARD,
+  EDIT_CARD,
 } from '../actions/Card'
 
 function decks(state = {}, action) {
-  const { title, oldTitle, newTitle, question, answer } = action
+  const { title, oldTitle, newTitle, question, answer, oldQuestion, newQuestion, newAnswer } = action
 
   switch (action.type) {
     case RECEIVE_DECKS: {
@@ -54,6 +55,15 @@ function decks(state = {}, action) {
         [title]: {
           title,
           questions: [{ question, answer }, ...state[title].questions]
+        }
+      }
+    }
+    case EDIT_CARD: {
+      return {
+        ...state,
+        [title]: {
+          title,
+          questions: [{ question: newQuestion, answer: newAnswer }, ...state[title].questions.filter(item => item.question !== oldQuestion)]
         }
       }
     }

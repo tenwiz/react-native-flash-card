@@ -19,7 +19,7 @@ class DeckDetail extends Component {
       : str
   }
 
-  renderItem = ({ item, itemProps }) => {
+  renderItem = ({ item, itemProps, deckTitle }) => {
     // if (item.title !== null) {
       return (
         <Swipeable style={styles.list}
@@ -32,10 +32,10 @@ class DeckDetail extends Component {
                 onPress={() => {
                   closeSwipeable(this.state.currentlyOpenSwipeable)
 
-                  // this.props.navigation.navigate(
-                  //   'DeckEdit',
-                  //   { operation: 'edit', oldTitle: item.title }
-                  // )
+                  this.props.navigation.navigate(
+                    'CardEdit',
+                    { operation: 'edit', deckTitle ,oldQuestion: item.question, oldAnswer: item.answer }
+                  )
                 }}
               >
                 <Edit />
@@ -100,7 +100,7 @@ class DeckDetail extends Component {
           <TouchableOpacity
             onPress={() => navigation.navigate(
               'CardEdit',
-              { deckTitle: deck.title }
+              { operation: 'add', deckTitle: deck.title }
             )}
           >
             <CardAdd />
@@ -109,7 +109,7 @@ class DeckDetail extends Component {
 
         <FlatList
           data={deck.questions}
-          renderItem={({ item }) => this.renderItem({ item, itemProps })}
+          renderItem={({ item }) => this.renderItem({ item, itemProps, deckTitle: deck.title })}
           keyExtractor={(item, index) => index}
         />
 
