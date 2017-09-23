@@ -9,26 +9,20 @@ class CardEdit extends Component {
   render() {
     // Navigation
     const { navigation } = this.props
-    const { deckTitle } = navigation.state.params
+    // const { deckTitle } = navigation.state.params
 
     return (
       <View style={styles.container}>
 
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.navigate(
-              'DeckDetail',
-              { deckTitle }
-            )}
+            onPress={() => navigation.goBack()}
           >
             <Back />
           </TouchableOpacity>
           <Text style={styles.middle}>CARD</Text>
           <TouchableOpacity
-            onPress={() => navigation.navigate(
-              'DeckDetail',
-              { deckTitle }
-            )}
+            onPress={() => navigation.goBack()}
           >
             <Check />
           </TouchableOpacity>

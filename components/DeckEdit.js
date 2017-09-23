@@ -24,14 +24,14 @@ class DeckEdit extends Component {
     const { input } = this.state
 
     console.log('------------------------------------')
-        console.log(this.props)
+    console.log(operation)
 
     return (
         <View style={styles.container}>
 
           <View style={styles.header}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('DeckMain')}
+              onPress={() => navigation.goBack()}
             >
               <Back />
             </TouchableOpacity>

@@ -14,6 +14,7 @@ import { receiveDecks } from '../actions/Deck'
 class DeckMain extends Component {
   state = {
     query: '',
+    currentlyOpenSwipeable: null,
   }
 
   componentDidMount() {
@@ -21,20 +22,50 @@ class DeckMain extends Component {
       .then(decks => this.props.receiveDecks(decks))
   }
 
+  closeSwipeable = () => {
+    const {currentlyOpenSwipeable} = this.state
+
+    if (currentlyOpenSwipeable) {
+      currentlyOpenSwipeable.recenter()
+    }
+  }
+
   renderItem = ({ item }) => {
+    const {currentlyOpenSwipeable} = this.state
+    const itemProps = {
+      onOpen: (event, gestureState, swipeable) => {
+        if (currentlyOpenSwipeable && currentlyOpenSwipeable !== swipeable) {
+          currentlyOpenSwipeable.recenter()
+        }
+
+        this.setState({currentlyOpenSwipeable: swipeable})
+      },
+      onClose: () => this.setState({currentlyOpenSwipeable: null}),
+    }
+
     return (
       <Swipeable style={styles.list}
+        onRightButtonsOpenRelease={itemProps.onOpen}
+        onRightButtonsCloseRelease={itemProps.onClose}
         rightButtons={[
           <View>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate(
-                'DeckEdit',
-                { operation: 'edit', deckTitle: item.title }
-              )}
-            ><DeckEdit /></TouchableOpacity>
+              onPress={() => {
+                this.closeSwipeable()
+
+                this.props.navigation.navigate(
+                  'DeckEdit',
+                  { operation: 'edit', deckTitle: item.title }
+                )
+              }}
+            >
+              <DeckEdit />
+            </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {console.log('hi')}}
-            ><DeckRemove /></TouchableOpacity>
+            >
+              <DeckRemove />
+            </TouchableOpacity>
           </View>
         ]}
       >
