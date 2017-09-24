@@ -204,7 +204,7 @@ export const styles = StyleSheet.create({
     margin: 5,
     marginBottom: 20,
   },
-  studyText: {
+  studyedText: {
     color: 'white',
     fontSize: 25,
     textAlign: 'center',

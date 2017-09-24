@@ -9,8 +9,8 @@ import { Back } from '../utils/icons'
 class CardDetail extends Component {
   render() {
     // Navigation
-    // const { navigation } = this.props
-    // const { deckTitle, question, answer } = navigation.state.params
+    const { navigation } = this.props
+    const { operation, deckTitle, question, answer } = navigation.state.params
 
     return (
       <View style={styles.container}>
@@ -21,12 +21,16 @@ class CardDetail extends Component {
           >
             <Back />
           </TouchableOpacity>
-          <Text style={styles.middle}>Martian</Text>
+          <Text style={styles.middle}>{deckTitle}</Text>
         </View>
 
-        <View>
-          <Text style={styles.progress}>3 of 6</Text>
-        </View>
+        {operation !== 'individual'
+          ? <View>
+              <Text style={styles.progress}>3 of 6</Text>
+            </View>
+          : <View>
+              <Text style={styles.progress}></Text>
+            </View>}
 
         <ScrollView>
           <FlipCard
@@ -36,26 +40,27 @@ class CardDetail extends Component {
             flipVertical={false}
           >
             <View style={styles.flipSide}>
-              <Text style={styles.face}>Martian?</Text>
+              <Text style={styles.face}>{question}</Text>
             </View>
             <View style={styles.flipSide}>
-              <Text style={styles.back}>Martian!</Text>
+              <Text style={styles.back}>{answer}</Text>
             </View>
           </FlipCard>
         </ScrollView>
 
-        <View style={styles.flexRow}>
-          <TouchableOpacity style={styles.leftButton}
-            // onPress={onDecrement}
-          >
-              <Text style={styles.studyText}>Not yet</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.rightButton}
-            // onPress={onIncrement}
-          >
-              <Text style={styles.studyText}>Got it!</Text>
-          </TouchableOpacity>
-        </View>
+        {operation !== 'individual' && (
+          <View style={styles.flexRow}>
+            <TouchableOpacity style={styles.leftButton}
+              // onPress={onDecrement}
+            >
+              <Text style={styles.studyedText}>Not yet</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.rightButton}
+              // onPress={onIncrement}
+            >
+              <Text style={styles.studyedText}>Got it!</Text>
+            </TouchableOpacity>
+          </View>)}
 
       </View>
     )

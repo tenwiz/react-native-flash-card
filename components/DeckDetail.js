@@ -52,7 +52,7 @@ class DeckDetail extends Component {
           <TouchableOpacity style={styles.flatCard}
             onPress={() => this.props.navigation.navigate(
               'CardDetail',
-              { deckTitle, question: item.question, answer: item.answer }
+              { operation: 'individual', deckTitle, question: item.question, answer: item.answer }
             )}
           >
             <Text style={styles.cardTitle}>{item.question}</Text>
