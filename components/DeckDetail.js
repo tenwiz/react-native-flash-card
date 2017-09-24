@@ -113,13 +113,17 @@ class DeckDetail extends Component {
           </TouchableOpacity>
         </View>
 
+        <TouchableOpacity style={styles.studyButton}>
+            <Text style={styles.studyText}>STUDY</Text>
+        </TouchableOpacity>
+
         <FlatList
           data={showingCards}
           renderItem={({ item }) => this.renderItem({ item, itemProps, deckTitle: deck.title })}
           keyExtractor={(item, index) => index}
         />
 
-        <KeyboardAvoidingView behavior='padding' style={styles.footer}>
+        <KeyboardAvoidingView style={styles.footer} behavior='padding'>
           <Search />
           <TextInput style={styles.search} placeholder='Search Cards'
             value={query}

@@ -104,9 +104,32 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     width: width - 40,
   },
+  studyButton: {
+    backgroundColor: '#007A3D',
+    width: 250,
+    padding: 10,
+    borderRadius: 5,
+    height: 50,
+    marginBottom: 10,
+  },
+  studyText: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
+  },
+  footer: {
+    width,
+    flexDirection: 'row',
+    backgroundColor: '#F5F5F5',
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      height: -3,
+      width: 0,
+    },
+  },
 
   /*
-  DeckDetail
+  DeckEdit
   */
 
   question: {
@@ -122,15 +145,5 @@ export const styles = StyleSheet.create({
     padding: 5,
     marginTop: 10,
     fontSize: 20,
-  },
-  footer: {
-    width,
-    flexDirection: 'row',
-    backgroundColor: '#F5F5F5',
-    shadowOpacity: 0.3,
-    shadowOffset: {
-      height: -3,
-      width: 0,
-    },
   },
 })
