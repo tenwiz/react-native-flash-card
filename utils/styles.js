@@ -152,8 +152,10 @@ export const styles = StyleSheet.create({
   */
 
   progress: {
-    fontSize: 15,
+    fontSize: 20,
     textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 10,
   },
   flipCard: {
     backgroundColor: '#FFFFFF',

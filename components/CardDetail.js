@@ -24,7 +24,7 @@ class CardDetail extends Component {
           <Text style={styles.middle}>{deckTitle}</Text>
         </View>
 
-        {operation !== 'individual'
+        {operation === 'group'
           ? <View>
               <Text style={styles.progress}>3 of 6</Text>
             </View>
@@ -48,7 +48,7 @@ class CardDetail extends Component {
           </FlipCard>
         </ScrollView>
 
-        {operation !== 'individual' && (
+        {operation === 'group' && (
           <View style={styles.flexRow}>
             <TouchableOpacity style={styles.leftButton}
               // onPress={onDecrement}
