@@ -123,4 +123,14 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 20,
   },
+  footer: {
+    width,
+    flexDirection: 'row',
+    backgroundColor: '#F5F5F5',
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      height: -3,
+      width: 0,
+    },
+  },
 })

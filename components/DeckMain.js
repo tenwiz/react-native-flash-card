@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, View, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
 import Swipeable from 'react-native-swipeable'
 
 import { fetchFlashCardResults } from '../utils/api'
@@ -106,14 +105,12 @@ class DeckMain extends Component {
       showingDecks = decks
     }
 
-    showingDecks.sort(sortBy('name'))
-
     return (
       <View style={styles.container}>
 
         <View style={styles.header}>
           <Search />
-          <TextInput style={styles.search} placeholder='Search decks'
+          <TextInput style={styles.search} placeholder='Search Decks'
             value={query}
             onChangeText={(query) => { this.setState({ query }) }}
           />

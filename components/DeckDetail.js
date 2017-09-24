@@ -1,28 +1,23 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, FlatList } from 'react-native'
+import { Text, View, TouchableOpacity, FlatList, TextInput, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import Swipeable from 'react-native-swipeable'
+import escapeRegExp from 'escape-string-regexp'
 
 import { styles } from '../utils/styles'
-import { Back, CardAdd, Edit, Remove } from '../utils/icons'
+import { Back, CardAdd, Edit, Remove, Search } from '../utils/icons'
 import { closeSwipeable } from '../utils/swipeable'
 
 import { removeCard } from '../actions/Card'
 
 class DeckDetail extends Component {
   state = {
+    query: '',
     currentlyOpenSwipeable: null,
   }
 
-  trim = (str) => {
-    return str.length > 100
-      ? str.slice(0, 100) + '...'
-      : str
-  }
-
   renderItem = ({ item, itemProps, deckTitle }) => {
-    // if (item.title !== null) {
       return (
         <Swipeable style={styles.list}
           onRightButtonsOpenRelease={itemProps.onOpen}
@@ -60,11 +55,10 @@ class DeckDetail extends Component {
             //   { deckTitle: item.title }
             // )}
           >
-            <Text style={styles.cardTitle}>{this.trim(item.question)}</Text>
+            <Text style={styles.cardTitle}>{item.question}</Text>
           </TouchableOpacity>
         </Swipeable>
       )
-    // }
   }
 
   render() {
@@ -75,7 +69,7 @@ class DeckDetail extends Component {
     const { deck } = this.props
 
     // State
-    const { currentlyOpenSwipeable } = this.state
+    const { query, currentlyOpenSwipeable } = this.state
 
     const barTitle = `${deck.title} (${deck.questions.length})`
 
@@ -87,6 +81,14 @@ class DeckDetail extends Component {
         this.setState({currentlyOpenSwipeable: swipeable})
       },
       onClose: () => this.setState({currentlyOpenSwipeable: null}),
+    }
+
+    let showingCards
+    if (query) {
+      const match = new RegExp(escapeRegExp(query), 'i')
+      showingCards = deck.questions.filter((item) => match.test(item.question) || match.test(item.answer))
+    } else {
+      showingCards = deck.questions
     }
 
     return (
@@ -112,10 +114,18 @@ class DeckDetail extends Component {
         </View>
 
         <FlatList
-          data={deck.questions}
+          data={showingCards}
           renderItem={({ item }) => this.renderItem({ item, itemProps, deckTitle: deck.title })}
           keyExtractor={(item, index) => index}
         />
+
+        <KeyboardAvoidingView behavior='padding' style={styles.footer}>
+          <Search />
+          <TextInput style={styles.search} placeholder='Search Cards'
+            value={query}
+            onChangeText={(query) => { this.setState({ query }) }}
+          />
+        </KeyboardAvoidingView>
 
       </View>
     )
