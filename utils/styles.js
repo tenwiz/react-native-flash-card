@@ -189,27 +189,4 @@ export const styles = StyleSheet.create({
     width: width - 40,
     color: '#007A3D',
   },
-  flexRow: {
-    flexDirection: 'row',
-  },
-  leftButton: {
-    backgroundColor: '#CE1126',
-    width: (width - 20) / 2 - 5,
-    height: 50,
-    margin: 5,
-    marginBottom: 20,
-  },
-  rightButton: {
-    backgroundColor: '#007A3D',
-    width: (width - 20) / 2 - 5,
-    height: 50,
-    margin: 5,
-    marginBottom: 20,
-  },
-  studyedText: {
-    color: 'white',
-    fontSize: 25,
-    textAlign: 'center',
-    marginTop: 10,
-  },
 })

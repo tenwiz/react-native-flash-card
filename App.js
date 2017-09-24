@@ -10,7 +10,6 @@ import DeckEdit from './components/DeckEdit'
 import DeckDetail from './components/DeckDetail'
 import CardEdit from './components/CardEdit'
 import CardDetail from './components/CardDetail'
-import Exemple from './components/deckSwiper'
 
 import reducer from './reducers'
 
@@ -55,7 +54,7 @@ export default class App extends Component {
           <View style={styles.statusBar}>
             <StatusBar />
           </View>
-          <Exemple />
+          <Navigator />
         </View>
       </Provider>
     )

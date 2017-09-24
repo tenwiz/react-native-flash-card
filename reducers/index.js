@@ -55,7 +55,7 @@ function decks(state = {}, action) {
         ...state,
         [title]: {
           title,
-          questions: [{ question, answer }, ...state[title].questions]
+          questions: [{ result: null, question, answer }, ...state[title].questions]
         }
       }
     }
@@ -64,7 +64,7 @@ function decks(state = {}, action) {
         ...state,
         [title]: {
           title,
-          questions: [{ question: newQuestion, answer: newAnswer }, ...state[title].questions.filter(item => item.question !== oldQuestion)]
+          questions: [{ result: null, question: newQuestion, answer: newAnswer }, ...state[title].questions.filter(item => item.question !== oldQuestion)]
         }
       }
     }

@@ -8,10 +8,12 @@ export function setDummyData() {
       title: 'TestE',
       questions: [
         {
+          result: null,
           question: 'What is React?',
           answer: 'A library for managing user interfaces'
         },
         {
+          result: null,
           question: 'Where do you make Ajax requests in React?',
           answer: 'The componentDidMount lifecycle event'
         }
@@ -21,6 +23,7 @@ export function setDummyData() {
       title: 'TestD',
       questions: [
         {
+          result: null,
           question: 'What is a closure?',
           answer: 'The combination of a function and the lexical environment within which that function was declared.'
         }
@@ -30,10 +33,12 @@ export function setDummyData() {
       title: 'TestC',
       questions: [
         {
+          result: null,
           question: 'What is React?',
           answer: 'A library for managing user interfaces'
         },
         {
+          result: null,
           question: 'Where do you make Ajax requests in React?',
           answer: 'The componentDidMount lifecycle event'
         }
@@ -43,6 +48,7 @@ export function setDummyData() {
       title: 'TestB',
       questions: [
         {
+          result: null,
           question: 'What is a closure?',
           answer: 'The combination of a function and the lexical environment within which that function was declared.'
         }
@@ -52,10 +58,12 @@ export function setDummyData() {
       title: 'TestA',
       questions: [
         {
+          result: null,
           question: 'What is React?',
           answer: 'A library for managing user interfaces'
         },
         {
+          result: null,
           question: 'Where do you make Ajax requests in React?',
           answer: 'The componentDidMount lifecycle event'
         }
@@ -65,6 +73,7 @@ export function setDummyData() {
       title: 'JavaScript',
       questions: [
         {
+          result: null,
           question: 'What is a closure?',
           answer: 'The combination of a function and the lexical environment within which that function was declared.'
         }
@@ -74,30 +83,37 @@ export function setDummyData() {
       title: 'React',
       questions: [
         {
+          result: null,
           question: 'What is React?',
           answer: 'A library for managing user interfaces'
         },
         {
+          result: null,
           question: 'Where do you make Ajax requests in React?',
           answer: 'The componentDidMount lifecycle event'
         },
         {
+          result: null,
           question: 'TestA',
           answer: 'A library for managing user interfaces'
         },
         {
+          result: null,
           question: 'TestB',
           answer: 'The componentDidMount lifecycle event'
         },
         {
+          result: null,
           question: 'TestC',
           answer: 'A library for managing user interfaces'
         },
         {
+          result: null,
           question: 'TestD',
           answer: 'The componentDidMount lifecycle event'
         },
         {
+          result: null,
           question: 'TestE',
           answer: 'A library for managing user interfaces'
         }
