@@ -157,22 +157,35 @@ export const styles = StyleSheet.create({
   },
   flipCard: {
     backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
     alignItems: 'center',
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.5,
     shadowOffset: {
-      height: 3,
-      width: 3,
+      height: 5,
+      width: 5,
     },
     width: width - 20,
     height: height - 200,
     marginTop: 5,
-    marginBottom: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderWidth: 0,
   },
-  cardContent: {
+  flipSide: {
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  face: {
     fontSize: 25,
     textAlign: 'center',
     width: width - 40,
+    color: '#CE1126',
+  },
+  back: {
+    fontSize: 25,
+    textAlign: 'center',
+    width: width - 40,
+    color: '#007A3D',
   },
   flexRow: {
     flexDirection: 'row',
@@ -182,12 +195,14 @@ export const styles = StyleSheet.create({
     width: (width - 20) / 2 - 5,
     height: 50,
     margin: 5,
+    marginBottom: 20,
   },
   rightButton: {
     backgroundColor: '#007A3D',
     width: (width - 20) / 2 - 5,
     height: 50,
     margin: 5,
+    marginBottom: 20,
   },
   studyText: {
     color: 'white',

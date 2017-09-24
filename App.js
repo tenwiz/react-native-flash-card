@@ -10,6 +10,7 @@ import DeckEdit from './components/DeckEdit'
 import DeckDetail from './components/DeckDetail'
 import CardEdit from './components/CardEdit'
 import CardDetail from './components/CardDetail'
+import FlipCardExample from './components/flipCard'
 
 import reducer from './reducers'
 

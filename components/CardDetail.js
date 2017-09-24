@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
+import FlipCard from 'react-native-flip-card'
 
 import { styles } from '../utils/styles'
 import { Back } from '../utils/icons'
@@ -27,9 +28,21 @@ class CardDetail extends Component {
           <Text style={styles.progress}>3 of 6</Text>
         </View>
 
-        <TouchableOpacity style={styles.flipCard}>
-          <Text style={styles.cardContent}>Martian?</Text>
-        </TouchableOpacity>
+        <ScrollView>
+          <FlipCard
+            style={styles.flipCard}
+            perspective={1000}
+            flipHorizontal={true}
+            flipVertical={false}
+          >
+            <View style={styles.flipSide}>
+              <Text style={styles.face}>Martian?</Text>
+            </View>
+            <View style={styles.flipSide}>
+              <Text style={styles.back}>Martian!</Text>
+            </View>
+          </FlipCard>
+        </ScrollView>
 
         <View style={styles.flexRow}>
           <TouchableOpacity style={styles.leftButton}
