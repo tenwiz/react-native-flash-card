@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   middle: {
     width: width - 110,
     marginTop: 15,
-    fontSize: 25,
+    fontSize: 23,
     textAlign: 'center',
   },
   right: {
@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     width: 50,
     textAlign: 'center',
   },
-  card: {
+  flatCard: {
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
@@ -129,7 +129,7 @@ export const styles = StyleSheet.create({
   },
 
   /*
-  DeckEdit
+  CardEdit
   */
 
   question: {
@@ -145,5 +145,54 @@ export const styles = StyleSheet.create({
     padding: 5,
     marginTop: 10,
     fontSize: 20,
+  },
+
+  /*
+  CardDetail
+  */
+
+  progress: {
+    fontSize: 15,
+    textAlign: 'center',
+  },
+  flipCard: {
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      height: 3,
+      width: 3,
+    },
+    width: width - 20,
+    height: height - 200,
+    marginTop: 5,
+    marginBottom: 10,
+  },
+  cardContent: {
+    fontSize: 25,
+    textAlign: 'center',
+    width: width - 40,
+  },
+  flexRow: {
+    flexDirection: 'row',
+  },
+  leftButton: {
+    backgroundColor: '#CE1126',
+    width: (width - 20) / 2 - 5,
+    height: 50,
+    margin: 5,
+  },
+  rightButton: {
+    backgroundColor: '#007A3D',
+    width: (width - 20) / 2 - 5,
+    height: 50,
+    margin: 5,
+  },
+  studyText: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
+    marginTop: 10,
   },
 })

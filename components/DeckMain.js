@@ -63,7 +63,7 @@ class DeckMain extends Component {
             </View>
           ]}
         >
-          <TouchableOpacity style={styles.card}
+          <TouchableOpacity style={styles.flatCard}
             onPress={() => this.props.navigation.navigate(
               'DeckDetail',
               { deckTitle: item.title }

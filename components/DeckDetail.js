@@ -49,11 +49,11 @@ class DeckDetail extends Component {
             </View>
           ]}
         >
-          <TouchableOpacity style={styles.card}
-            // onPress={() => this.props.navigation.navigate(
-            //   'DeckDetail',
-            //   { deckTitle: item.title }
-            // )}
+          <TouchableOpacity style={styles.flatCard}
+            onPress={() => this.props.navigation.navigate(
+              'CardDetail',
+              { deckTitle, question: item.question, answer: item.answer }
+            )}
           >
             <Text style={styles.cardTitle}>{item.question}</Text>
           </TouchableOpacity>
@@ -96,9 +96,7 @@ class DeckDetail extends Component {
 
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => {
-              navigation.goBack(navigation.state.params.key)
-            }}
+            onPress={() => navigation.goBack(navigation.state.params.key)}
           >
             <Back />
           </TouchableOpacity>

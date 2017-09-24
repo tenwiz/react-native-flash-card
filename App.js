@@ -9,6 +9,7 @@ import DeckMain from './components/DeckMain'
 import DeckEdit from './components/DeckEdit'
 import DeckDetail from './components/DeckDetail'
 import CardEdit from './components/CardEdit'
+import CardDetail from './components/CardDetail'
 
 import reducer from './reducers'
 
@@ -36,7 +37,13 @@ const Navigator = StackNavigator({
     navigationOptions: {
       header: null,
     },
-  }
+  },
+  CardDetail: {
+    screen: CardDetail,
+    navigationOptions: {
+      header: null,
+    },
+  },
 })
 
 export default class App extends Component {
@@ -47,7 +54,7 @@ export default class App extends Component {
           <View style={styles.statusBar}>
             <StatusBar />
           </View>
-          <Navigator />
+          <CardDetail />
         </View>
       </Provider>
     )
