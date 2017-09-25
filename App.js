@@ -9,7 +9,8 @@ import DeckMain from './components/DeckMain'
 import DeckEdit from './components/DeckEdit'
 import DeckDetail from './components/DeckDetail'
 import CardEdit from './components/CardEdit'
-import CardDetail from './components/CardDetail'
+import CardQuiz from './components/CardQuiz'
+import Result from './components/Result'
 
 import reducer from './reducers'
 
@@ -38,8 +39,14 @@ const Navigator = StackNavigator({
       header: null,
     },
   },
-  CardDetail: {
-    screen: CardDetail,
+  CardQuiz: {
+    screen: CardQuiz,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Result: {
+    screen: Result,
     navigationOptions: {
       header: null,
     },

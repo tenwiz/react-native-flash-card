@@ -9,10 +9,11 @@ import {
   ADD_CARD,
   EDIT_CARD,
   REMOVE_CARD,
+  QUIZ_CARD,
 } from '../actions/Card'
 
 function decks(state = {}, action) {
-  const { title, oldTitle, newTitle, question, answer, oldQuestion, newQuestion, newAnswer } = action
+  const { title, oldTitle, newTitle, question, answer, oldQuestion, newQuestion, newAnswer, result } = action
 
   switch (action.type) {
     case RECEIVE_DECKS: {
@@ -74,6 +75,21 @@ function decks(state = {}, action) {
         [title]: {
           title,
           questions: [...state[title].questions.filter(item => item.question !== question)]
+        }
+      }
+    }
+    case QUIZ_CARD: {
+      return {
+        ...state,
+        [title]: {
+          title,
+          questions: [...state[title].questions.map(item => {
+            if (item.question === question) {
+              return { result, question: item.question, answer: item.answer }
+            } else {
+              return item
+            }
+          })]
         }
       }
     }

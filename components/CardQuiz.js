@@ -7,20 +7,20 @@ import Swiper from 'react-native-deck-swiper'
 import { styles } from '../utils/styles'
 import { Back } from '../utils/icons'
 
-class CardDetail extends Component {
+import { quizCard } from '../actions/Card'
+
+class CardQuiz extends Component {
   state = {
     cards: [],
-    finished: 0,
-    total: 0,
+    total: '',
   }
 
   componentDidMount() {
     const { deck } = this.props.navigation.state.params
 
     this.setState({
-      finished: deck.questions.filter(item => item.result !== null).length,
+      cards: deck.questions.filter(item => item.result === null),
       total: deck.questions.length,
-      cards: deck.questions,
     })
   }
 
@@ -51,8 +51,11 @@ class CardDetail extends Component {
     const { navigation } = this.props
     const { operation, deck, deckTitle, question, answer } = navigation.state.params
 
+    // Store
+    const { right, wrong, quizCard } = this.props
+
     // State
-    const { cards, finished, total } = this.state
+    const { cards, total } = this.state
 
     return (
       <View style={styles.container}>
@@ -63,9 +66,18 @@ class CardDetail extends Component {
           }}
           cards={cards}
           renderCard={this.renderCard}
-          onSwipedLeft={() => {console.log('not yet')}}
-          onSwipedRight={() => {console.log('got it')}}
-          onSwipedAll={() => {console.log('finish')}}
+          onSwipedLeft={index => {
+            quizCard({ title: deck.title, question: cards[index].question, result: 'wrong' })
+          }}
+          onSwipedRight={index => {
+            quizCard({ title: deck.title, question: cards[index].question, result: 'right' })
+          }}
+          onSwipedAll={() => {
+            this.props.navigation.navigate(
+              'Result',
+              { deckTitle: deck.title, key: navigation.state.key }
+            )
+          }}
           overlayLabels={{
             left: {
               title: 'NOT YET',
@@ -96,12 +108,12 @@ class CardDetail extends Component {
           >
             <Back />
           </TouchableOpacity>
-          <Text style={styles.middle}>{deckTitle}</Text>
+          <Text style={styles.middle}>{deck.title}</Text>
         </View>
 
         {operation === 'group'
           ? <View>
-              <Text style={styles.progress}>{finished} of {total}</Text>
+              <Text style={styles.progress}>{right + wrong + 1} of {total}</Text>
             </View>
           : <View>
               <Text style={styles.progress}></Text>
@@ -112,15 +124,23 @@ class CardDetail extends Component {
   }
 }
 
-function mapStateToProps () {
-  return {}
+function mapStateToProps (decks, { navigation }) {
+  const { deck } = navigation.state.params
+  const questions = decks[deck.title].questions
+
+  return {
+    right: questions.filter(item => item.result === 'right').length,
+    wrong: questions.filter(item => item.result === 'wrong').length,
+  }
 }
 
-function mapDispatchToProps () {
-  return {}
+function mapDispatchToProps (dispatch) {
+  return {
+    quizCard: (data) => dispatch(quizCard(data)),
+  }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CardDetail)
+)(CardQuiz)

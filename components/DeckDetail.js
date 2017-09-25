@@ -51,7 +51,7 @@ class DeckDetail extends Component {
         >
           <TouchableOpacity style={styles.flatCard}
             onPress={() => this.props.navigation.navigate(
-              'CardDetail',
+              'CardQuiz',
               { operation: 'individual', deckTitle, question: item.question, answer: item.answer }
             )}
           >
@@ -113,7 +113,7 @@ class DeckDetail extends Component {
 
         <TouchableOpacity style={styles.studyButton}
           onPress={() => navigation.navigate(
-            'CardDetail',
+            'CardQuiz',
             { operation: 'group', deck }
           )}
         >
