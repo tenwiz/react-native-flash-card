@@ -50,7 +50,7 @@ class CardQuiz extends Component {
   render() {
     // Navigation
     const { navigation } = this.props
-    const { operation, deckTitle, question, answer, key } = navigation.state.params
+    const { operation, deckTitle, card, key } = navigation.state.params
 
     // Store
     const { deck, quizCard } = this.props
@@ -66,47 +66,48 @@ class CardQuiz extends Component {
     return (
       <View style={styles.container}>
 
-        <Swiper
-          ref={swiper => {
-            this.swiper = swiper
-          }}
-          cards={cards}
-          renderCard={this.renderCard}
-          onSwipedLeft={index => {
-            quizCard({ title: deckTitle, question: cards[index].question, result: 'wrong' })
-          }}
-          onSwipedRight={index => {
-            quizCard({ title: deckTitle, question: cards[index].question, result: 'right' })
-          }}
-          onSwipedAll={() => {
-            this.props.navigation.navigate(
-              'Result',
-              { deck, right, total: all, key: operation === 'retry' ? key : navigation.state.key }
-            )
-          }}
-          overlayLabels={{
-            left: {
-              title: 'NOT YET',
-              swipeColor: '#CE1126',
-              backgroundOpacity: '0.75',
-              fontColor: '#FFF'
-            },
-            right: {
-              title: 'GOT IT',
-              swipeColor: '#007A3D',
-              backgroundOpacity: '0.75',
-              fontColor: '#FFF'
-            },
-          }}
-          animateOverlayLabelsOpacity
-          animateCardOpacity
-          backgroundColor='#FAFAFA'
-          verticalSwipe={false}
-          cardVerticalMargin={0}
-          cardHorizontalMargin={0}
-          marginTop={110}
-        >
-        </Swiper>
+        {operation !== 'individual' &&
+          <Swiper
+            ref={swiper => {
+              this.swiper = swiper
+            }}
+            cards={cards}
+            renderCard={this.renderCard}
+            onSwipedLeft={index => {
+              quizCard({ title: deckTitle, question: cards[index].question, result: 'wrong' })
+            }}
+            onSwipedRight={index => {
+              quizCard({ title: deckTitle, question: cards[index].question, result: 'right' })
+            }}
+            onSwipedAll={() => {
+              this.props.navigation.navigate(
+                'Result',
+                { deck, right, total: all, key: operation === 'retry' ? key : navigation.state.key }
+              )
+            }}
+            overlayLabels={{
+              left: {
+                title: 'NOT YET',
+                swipeColor: '#CE1126',
+                backgroundOpacity: '0.75',
+                fontColor: '#FFF'
+              },
+              right: {
+                title: 'GOT IT',
+                swipeColor: '#007A3D',
+                backgroundOpacity: '0.75',
+                fontColor: '#FFF'
+              },
+            }}
+            animateOverlayLabelsOpacity
+            animateCardOpacity
+            backgroundColor='#FAFAFA'
+            verticalSwipe={false}
+            cardVerticalMargin={0}
+            cardHorizontalMargin={0}
+            marginTop={110}
+          >
+          </Swiper>}
 
         <View style={styles.header}>
           <TouchableOpacity
@@ -117,13 +118,15 @@ class CardQuiz extends Component {
           <Text style={styles.middle}>{deckTitle}</Text>
         </View>
 
-        {operation === 'group' || 'retry'
+        {operation !== 'individual'
           ? <View>
               <Text style={styles.progress}>{(total - unawsered) < total ? total - unawsered + 1 : total} of {total}</Text>
             </View>
           : <View>
               <Text style={styles.progress}></Text>
             </View>}
+
+        {operation === 'individual' && this.renderCard(card)}
 
       </View>
     )

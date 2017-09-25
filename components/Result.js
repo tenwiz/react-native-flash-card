@@ -71,14 +71,8 @@ class Result extends Component {
   }
 }
 
-function mapStateToProps (decks, { navigation }) {
-  // const { deck } = navigation.state.params
-  // const questions = decks[deck.title].questions
-
-  return {
-  //   right: questions.filter(item => item.result === 'right').length,
-  //   wrong: questions.filter(item => item.result === 'wrong').length,
-  }
+function mapStateToProps () {
+  return {}
 }
 
 function mapDispatchToProps (dispatch) {
