@@ -63,6 +63,8 @@ class CardQuiz extends Component {
     const unawsered = questions.filter(item => item.result === null).length
     const right = questions.filter(item => item.result === 'right').length
 
+
+
     return (
       <View style={styles.container}>
 
@@ -111,14 +113,20 @@ class CardQuiz extends Component {
 
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              navigation.goBack()
+
+              if (total === 0) {
+                questions.map(item => quizCard({ title: deck.title, question: item.question, result: null }))
+              }
+            }}
           >
             <Back />
           </TouchableOpacity>
           <Text style={styles.middle}>{deckTitle}</Text>
         </View>
 
-        {operation !== 'individual'
+        {(operation !== 'individual') && (total !== 0)
           ? <View>
               <Text style={styles.progress}>{(total - unawsered) < total ? total - unawsered + 1 : total} of {total}</Text>
             </View>
@@ -127,6 +135,12 @@ class CardQuiz extends Component {
             </View>}
 
         {operation === 'individual' && this.renderCard(card)}
+
+        {total === 0 &&
+          <View>
+            <Text style={styles.progress}>Please go back and click STUDY again</Text>
+          </View>
+        }
 
       </View>
     )

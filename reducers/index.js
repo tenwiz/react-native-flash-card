@@ -12,6 +12,8 @@ import {
   QUIZ_CARD,
 } from '../actions/Card'
 
+import { submitEntry } from '../utils/api'
+
 function decks(state = {}, action) {
   const { title, oldTitle, newTitle, question, answer, oldQuestion, newQuestion, newAnswer, result } = action
 
@@ -23,6 +25,7 @@ function decks(state = {}, action) {
       }
     }
     case ADD_DECK: {
+      submitEntry({ key: title, entry: { title, questions: [] } })
       return {
         ...state,
         [title]: {
@@ -32,6 +35,8 @@ function decks(state = {}, action) {
       }
     }
     case EDIT_DECK: {
+      submitEntry({ key: oldTitle, entry: { title: null } })
+      submitEntry({ key: newTitle, entry: { title: newTitle, questions: state[oldTitle].questions } })
       return {
         ...state,
         [oldTitle]: {
@@ -44,6 +49,7 @@ function decks(state = {}, action) {
       }
     }
     case REMOVE_DECK: {
+      submitEntry({ key: title, entry: { title: null } })
       return {
         ...state,
         [title]: {
@@ -52,6 +58,7 @@ function decks(state = {}, action) {
       }
     }
     case ADD_CARD: {
+      submitEntry({ key: title, entry: { title, questions: [{ result: null, question, answer }, ...state[title].questions] } })
       return {
         ...state,
         [title]: {
@@ -61,6 +68,7 @@ function decks(state = {}, action) {
       }
     }
     case EDIT_CARD: {
+      submitEntry({ key: title, entry: { title, questions: [{ result: null, question: newQuestion, answer: newAnswer }, ...state[title].questions.filter(item => item.question !== oldQuestion)] } })
       return {
         ...state,
         [title]: {
@@ -70,6 +78,7 @@ function decks(state = {}, action) {
       }
     }
     case REMOVE_CARD: {
+      submitEntry({ key: title, entry: { title, questions: [...state[title].questions.filter(item => item.question !== question)] } })
       return {
         ...state,
         [title]: {
@@ -79,6 +88,11 @@ function decks(state = {}, action) {
       }
     }
     case QUIZ_CARD: {
+      submitEntry({ key: title, entry: { title, questions: [...state[title].questions.map(item => {
+                                                  return item.question === question
+                                                    ? { result, question: item.question, answer: item.answer }
+                                                    : item
+                                                })] } })
       return {
         ...state,
         [title]: {

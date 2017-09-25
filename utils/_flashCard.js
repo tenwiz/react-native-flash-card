@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native'
 
 export const FLASHCARD_STORAGE_KEY = 'flashCard'
 
-export function setDummyData() {
+export function setDummyData(results) {
   const dummyData = {
     TestE: {
       title: 'TestE',
@@ -121,7 +121,11 @@ export function setDummyData() {
     }
   }
 
-  AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(dummyData))
+  if (results === null) {
+    AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(dummyData))
 
-  return dummyData
+    return dummyData
+  } else {
+    return (JSON.parse(results))
+  }
 }
