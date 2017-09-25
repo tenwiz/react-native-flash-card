@@ -25,7 +25,11 @@ class Result extends Component {
 
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.goBack(key)}
+            onPress={() => {
+              navigation.goBack(key)
+
+              deck.questions.map(item => quizCard({ title: deck.title, question: item.question, result: null }))
+            }}
           >
             <Back />
           </TouchableOpacity>
@@ -47,13 +51,15 @@ class Result extends Component {
           onPress={() => {
             if (boolean) {
               navigation.goBack(key)
-            } else {
-              deck.questions.filter(item => item.result === 'wrong').map(item => quizCard({ title: deck.title, question: item.question, result: null }))
 
+              deck.questions.map(item => quizCard({ title: deck.title, question: item.question, result: null }))
+            } else {
               navigation.navigate(
                 'CardQuiz',
                 { operation: 'retry', deckTitle: deck.title, key }
               )
+
+              deck.questions.filter(item => item.result === 'wrong').map(item => quizCard({ title: deck.title, question: item.question, result: null }))
             }
           }}
         >

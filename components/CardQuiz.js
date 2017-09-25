@@ -83,8 +83,6 @@ class CardQuiz extends Component {
               'Result',
               { deck, right, total: all, key: operation === 'retry' ? key : navigation.state.key }
             )
-
-            // resetCard({ title: deckTitle })
           }}
           overlayLabels={{
             left: {
