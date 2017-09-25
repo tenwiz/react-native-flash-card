@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, FlatList, TextInput, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationActions } from 'react-navigation'
 import Swipeable from 'react-native-swipeable'
 import escapeRegExp from 'escape-string-regexp'
 
@@ -31,7 +30,7 @@ class DeckDetail extends Component {
 
                   this.props.navigation.navigate(
                     'CardEdit',
-                    { operation: 'edit', deckTitle ,oldQuestion: item.question, oldAnswer: item.answer }
+                    { operation: 'edit', deckTitle, oldQuestion: item.question, oldAnswer: item.answer }
                   )
                 }}
               >
@@ -97,6 +96,7 @@ class DeckDetail extends Component {
 
         <View style={styles.header}>
           <TouchableOpacity
+            // 'key' from DeckEdit page
             onPress={() => navigation.goBack(key)}
           >
             <Back />

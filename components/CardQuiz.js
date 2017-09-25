@@ -15,6 +15,7 @@ console.disableYellowBox = true
 class CardQuiz extends Component {
   state = {
     cards: [],
+    // Number of cards being quizzed (consider 'TRY AGAIN' in Result page), not necessarily the total number of cards of this deck
     total: '',
   }
 
@@ -53,6 +54,10 @@ class CardQuiz extends Component {
   render() {
     // Navigation
     const { navigation } = this.props
+    // Operation could be
+    // 'individual' (click on indivdual card in DeckDetail page),
+    // 'group' (click on 'STUDY' in DeckDetail page) and
+    // 'retry' (click on 'TRY AGAIN' in Result page)
     const { operation, deckTitle, card, key } = navigation.state.params
 
     // Store
@@ -62,6 +67,7 @@ class CardQuiz extends Component {
     const { cards, total } = this.state
 
     const questions = deck.questions
+    // TOTAL number of cards of this deck
     const all = questions.length
     const unawsered = questions.filter(item => item.result === null).length
     const right = questions.filter(item => item.result === 'right').length
@@ -91,6 +97,7 @@ class CardQuiz extends Component {
             onSwipedAll={() => {
               this.props.navigation.navigate(
                 'Result',
+                // Creat the key of first CardQuiz page, pass it between CardQuiz and Result, and finally go back from it in Result page
                 { deck, right, total: all, key: operation === 'retry' ? key : navigation.state.key }
               )
             }}
@@ -123,7 +130,11 @@ class CardQuiz extends Component {
             onPress={() => {
               navigation.goBack()
 
+              // The results will be reset when exit Result page (click on any button),
+              // however if you refresh in Result page the results won't be reset
+              // and next time you click 'STUDY' in CardDetail page, no questions will show up
               if (total === 0) {
+                // This will reset all results when above happens
                 questions.map(item => quizCard({ title: deck.title, question: item.question, result: null }))
               }
             }}

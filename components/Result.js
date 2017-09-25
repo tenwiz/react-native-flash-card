@@ -18,7 +18,7 @@ class Result extends Component {
     const { quizCard } = this.props
 
     const progress = right / total
-    const boolean = right === total
+    const allRight = right === total
 
     return (
       <View style={styles.container}>
@@ -26,8 +26,10 @@ class Result extends Component {
         <View style={styles.header}>
           <TouchableOpacity
             onPress={() => {
+              // Go back from the first CardQuiz page
               navigation.goBack(key)
 
+              // Reset ALL results
               deck.questions.map(item => quizCard({ title: deck.title, question: item.question, result: null }))
             }}
           >
@@ -42,16 +44,17 @@ class Result extends Component {
             progress={progress}
             showsText={true}
             formatText={() => {return `${Math.floor(progress * 100)}%`}}
-            color={boolean ? '#007A3D' : '#CE1126'}
+            color={allRight ? '#007A3D' : '#CE1126'}
             thickness={5}
           />
         </View>
 
         <TouchableOpacity style={styles.resultButton}
           onPress={() => {
-            if (boolean) {
+            if (allRight) {
               navigation.goBack(key)
 
+              // Reset ALL results
               deck.questions.map(item => quizCard({ title: deck.title, question: item.question, result: null }))
             } else {
               navigation.navigate(
@@ -59,20 +62,17 @@ class Result extends Component {
                 { operation: 'retry', deckTitle: deck.title, key }
               )
 
+              // Reset WRONG results
               deck.questions.filter(item => item.result === 'wrong').map(item => quizCard({ title: deck.title, question: item.question, result: null }))
             }
           }}
         >
-            <Text style={styles.buttonText}>{boolean ? 'YOU NAILED IT!' : 'TRY AGAIN'}</Text>
+            <Text style={styles.buttonText}>{allRight ? 'YOU NAILED IT!' : 'TRY AGAIN'}</Text>
         </TouchableOpacity>
 
       </View>
     )
   }
-}
-
-function mapStateToProps () {
-  return {}
 }
 
 function mapDispatchToProps (dispatch) {
@@ -82,6 +82,6 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(Result)
