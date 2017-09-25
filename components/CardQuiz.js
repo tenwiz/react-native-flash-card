@@ -6,8 +6,11 @@ import Swiper from 'react-native-deck-swiper'
 
 import { styles } from '../utils/styles'
 import { Back } from '../utils/icons'
+import { setLocalNotification, clearLocalNotification } from '../utils/notification'
 
 import { quizCard } from '../actions/Card'
+
+console.disableYellowBox = true
 
 class CardQuiz extends Component {
   state = {
@@ -63,8 +66,6 @@ class CardQuiz extends Component {
     const unawsered = questions.filter(item => item.result === null).length
     const right = questions.filter(item => item.result === 'right').length
 
-
-
     return (
       <View style={styles.container}>
 
@@ -77,9 +78,15 @@ class CardQuiz extends Component {
             renderCard={this.renderCard}
             onSwipedLeft={index => {
               quizCard({ title: deckTitle, question: cards[index].question, result: 'wrong' })
+
+              clearLocalNotification()
+                .then(setLocalNotification)
             }}
             onSwipedRight={index => {
               quizCard({ title: deckTitle, question: cards[index].question, result: 'right' })
+
+              clearLocalNotification()
+                .then(setLocalNotification)
             }}
             onSwipedAll={() => {
               this.props.navigation.navigate(

@@ -11,8 +11,12 @@ import DeckDetail from './components/DeckDetail'
 import CardEdit from './components/CardEdit'
 import CardQuiz from './components/CardQuiz'
 import Result from './components/Result'
+import { setLocalNotification } from './utils/notification'
 
 import reducer from './reducers'
+
+// Disable warning
+console.disableYellowBox = true
 
 const Navigator = StackNavigator({
   DeckMain: {
@@ -54,6 +58,9 @@ const Navigator = StackNavigator({
 })
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer)}>

@@ -44,11 +44,6 @@ export const styles = StyleSheet.create({
     width: 50,
     textAlign: 'center',
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 25,
-    textAlign: 'center',
-  },
   flatCard: {
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
@@ -62,6 +57,11 @@ export const styles = StyleSheet.create({
     height: 100,
     marginBottom: 10,
     marginLeft: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
   },
 
   /*

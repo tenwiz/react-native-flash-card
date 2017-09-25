@@ -13,12 +13,6 @@ export function submitEntry ({ key, entry }) {
   }))
 }
 
-export function removeEntry (key) {
-  return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
-    .then((results) => {
-      const data = JSON.parse(results)
-      data[key] = undefined
-      delete data[key]
-      AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(data))
-    })
-}
+// export function fetchFlashCardResults() {
+//   AsyncStorage.clear(FLASHCARD_STORAGE_KEY)
+// }
