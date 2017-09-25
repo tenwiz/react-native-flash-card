@@ -44,6 +44,11 @@ export const styles = StyleSheet.create({
     width: 50,
     textAlign: 'center',
   },
+  buttonText: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
+  },
   flatCard: {
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
@@ -112,11 +117,6 @@ export const styles = StyleSheet.create({
     height: 50,
     marginBottom: 10,
   },
-  studyText: {
-    color: 'white',
-    fontSize: 25,
-    textAlign: 'center',
-  },
   footer: {
     width,
     flexDirection: 'row',
@@ -148,7 +148,7 @@ export const styles = StyleSheet.create({
   },
 
   /*
-  CardDetail
+  CardQuiz
   */
 
   progress: {
@@ -188,5 +188,22 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     width: width - 40,
     color: '#007A3D',
+  },
+
+  /*
+  Result
+  */
+
+  resultCircle: {
+    marginTop:100,
+    marginBottom: 50,
+  },
+  resultButton: {
+    backgroundColor: '#007A3D',
+    width: 220,
+    padding: 10,
+    borderRadius: 5,
+    height: 50,
+    marginBottom: 10,
   },
 })

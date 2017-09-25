@@ -75,7 +75,7 @@ class CardQuiz extends Component {
           onSwipedAll={() => {
             this.props.navigation.navigate(
               'Result',
-              { deckTitle: deck.title, key: navigation.state.key }
+              { deckTitle: deck.title, right, total, key: navigation.state.key }
             )
           }}
           overlayLabels={{
@@ -113,7 +113,7 @@ class CardQuiz extends Component {
 
         {operation === 'group'
           ? <View>
-              <Text style={styles.progress}>{right + wrong + 1} of {total}</Text>
+              <Text style={styles.progress}>{(right + wrong) < total ? right + wrong + 1 : total} of {total}</Text>
             </View>
           : <View>
               <Text style={styles.progress}></Text>

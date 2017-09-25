@@ -64,6 +64,7 @@ class DeckDetail extends Component {
   render() {
     // Navigation
     const { navigation } = this.props
+    const { key } = navigation.state.params
 
     // Store
     const { deck } = this.props
@@ -96,7 +97,7 @@ class DeckDetail extends Component {
 
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.goBack(navigation.state.params.key)}
+            onPress={() => navigation.goBack(key)}
           >
             <Back />
           </TouchableOpacity>
@@ -117,7 +118,7 @@ class DeckDetail extends Component {
             { operation: 'group', deck }
           )}
         >
-            <Text style={styles.studyText}>STUDY</Text>
+            <Text style={styles.buttonText}>STUDY</Text>
         </TouchableOpacity>
 
         <FlatList

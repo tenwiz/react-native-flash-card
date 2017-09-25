@@ -25,6 +25,7 @@
     "react-native": "^0.47.0",
     "react-native-deck-swiper": "^1.3.8",
     "react-native-flip-card": "^3.5.1",
+    "react-native-progress": "^3.4.0",
     "react-native-swipeable": "^0.6.0",
     "react-native-swipeout": "^2.2.2",
     "react-native-swiper": "^1.5.12",
