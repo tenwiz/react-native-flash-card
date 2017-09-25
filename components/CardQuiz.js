@@ -16,11 +16,12 @@ class CardQuiz extends Component {
   }
 
   componentDidMount() {
-    const { deck } = this.props.navigation.state.params
+    const { deck } = this.props
+    const questions = deck.questions.filter(item => item.result === null)
 
     this.setState({
-      cards: deck.questions.filter(item => item.result === null),
-      total: deck.questions.length,
+      cards: questions,
+      total: questions.length,
     })
   }
 
@@ -49,13 +50,18 @@ class CardQuiz extends Component {
   render() {
     // Navigation
     const { navigation } = this.props
-    const { operation, deck, deckTitle, question, answer } = navigation.state.params
+    const { operation, deckTitle, question, answer, key } = navigation.state.params
 
     // Store
-    const { right, wrong, quizCard } = this.props
+    const { deck, quizCard } = this.props
 
     // State
     const { cards, total } = this.state
+
+    const questions = deck.questions
+    const all = questions.length
+    const unawsered = questions.filter(item => item.result === null).length
+    const right = questions.filter(item => item.result === 'right').length
 
     return (
       <View style={styles.container}>
@@ -67,16 +73,18 @@ class CardQuiz extends Component {
           cards={cards}
           renderCard={this.renderCard}
           onSwipedLeft={index => {
-            quizCard({ title: deck.title, question: cards[index].question, result: 'wrong' })
+            quizCard({ title: deckTitle, question: cards[index].question, result: 'wrong' })
           }}
           onSwipedRight={index => {
-            quizCard({ title: deck.title, question: cards[index].question, result: 'right' })
+            quizCard({ title: deckTitle, question: cards[index].question, result: 'right' })
           }}
           onSwipedAll={() => {
             this.props.navigation.navigate(
               'Result',
-              { deckTitle: deck.title, right, total, key: navigation.state.key }
+              { deck, right, total: all, key: operation === 'retry' ? key : navigation.state.key }
             )
+
+            // resetCard({ title: deckTitle })
           }}
           overlayLabels={{
             left: {
@@ -108,12 +116,12 @@ class CardQuiz extends Component {
           >
             <Back />
           </TouchableOpacity>
-          <Text style={styles.middle}>{deck.title}</Text>
+          <Text style={styles.middle}>{deckTitle}</Text>
         </View>
 
-        {operation === 'group'
+        {operation === 'group' || 'retry'
           ? <View>
-              <Text style={styles.progress}>{(right + wrong) < total ? right + wrong + 1 : total} of {total}</Text>
+              <Text style={styles.progress}>{(total - unawsered) < total ? total - unawsered + 1 : total} of {total}</Text>
             </View>
           : <View>
               <Text style={styles.progress}></Text>
@@ -125,12 +133,10 @@ class CardQuiz extends Component {
 }
 
 function mapStateToProps (decks, { navigation }) {
-  const { deck } = navigation.state.params
-  const questions = decks[deck.title].questions
+  const { deckTitle } = navigation.state.params
 
   return {
-    right: questions.filter(item => item.result === 'right').length,
-    wrong: questions.filter(item => item.result === 'wrong').length,
+    deck: decks[deckTitle]
   }
 }
 

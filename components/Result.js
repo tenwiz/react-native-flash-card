@@ -6,11 +6,16 @@ import * as Progress from 'react-native-progress'
 import { styles } from '../utils/styles'
 import { Back } from '../utils/icons'
 
+import { quizCard } from '../actions/Card'
+
 class Result extends Component {
   render() {
     // Navigation
     const { navigation } = this.props
-    const { deckTitle, right, total, key } = navigation.state.params
+    const { deck, right, total, key } = navigation.state.params
+
+    // Store
+    const { quizCard } = this.props
 
     const progress = right / total
     const boolean = right === total
@@ -24,7 +29,7 @@ class Result extends Component {
           >
             <Back />
           </TouchableOpacity>
-          <Text style={styles.middle}>Martian (6)</Text>
+          <Text style={styles.middle}>{deck.title} ({total})</Text>
         </View>
 
         <View style={styles.resultCircle}>
@@ -39,7 +44,18 @@ class Result extends Component {
         </View>
 
         <TouchableOpacity style={styles.resultButton}
-          onPress={() => navigation.goBack(key)}
+          onPress={() => {
+            if (boolean) {
+              navigation.goBack(key)
+            } else {
+              deck.questions.filter(item => item.result === 'wrong').map(item => quizCard({ title: deck.title, question: item.question, result: null }))
+
+              navigation.navigate(
+                'CardQuiz',
+                { operation: 'retry', deckTitle: deck.title, key }
+              )
+            }
+          }}
         >
             <Text style={styles.buttonText}>{boolean ? 'YOU NAILED IT!' : 'TRY AGAIN'}</Text>
         </TouchableOpacity>
@@ -59,8 +75,10 @@ function mapStateToProps (decks, { navigation }) {
   }
 }
 
-function mapDispatchToProps () {
-  return {}
+function mapDispatchToProps (dispatch) {
+  return {
+    quizCard: (data) => dispatch(quizCard(data)),
+  }
 }
 
 export default connect(

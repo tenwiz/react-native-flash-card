@@ -115,7 +115,7 @@ class DeckDetail extends Component {
         <TouchableOpacity style={styles.studyButton}
           onPress={() => navigation.navigate(
             'CardQuiz',
-            { operation: 'group', deck }
+            { operation: 'group', deckTitle: deck.title }
           )}
         >
             <Text style={styles.buttonText}>STUDY</Text>

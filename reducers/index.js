@@ -84,11 +84,9 @@ function decks(state = {}, action) {
         [title]: {
           title,
           questions: [...state[title].questions.map(item => {
-            if (item.question === question) {
-              return { result, question: item.question, answer: item.answer }
-            } else {
-              return item
-            }
+            return item.question === question
+              ? { result, question: item.question, answer: item.answer }
+              : item
           })]
         }
       }
