@@ -1,5 +1,25 @@
 [Demos](https://github.com/Martian2Lee/Portfolio)
 
+# Mobile Flashcards
+
+## Test
+
+The application was tested on iPhone 7 Plus and Samsung Galaxy S6.
+
+## App Usage
+
+* Tapping cards for the answer.
+* Swiping cards for right or wrong.
+
+## Run
+
+* Make sure `yarn` is installed
+* `git clone https://github.com/Martian2Lee/Mobile-Flashcards.git` 
+* `cd Mobile-Flashcards/`
+* `yarn install`
+* `yarn start`
+* Follow instructions to open Android or iOS simulator on PC or phone.
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
