@@ -24,8 +24,3 @@ In Card Quiz:
 * `yarn install`
 * `yarn start`
 * Follow instructions to open Android or iOS simulator on PC or phone.
-
-Reply to requirement:
-1) Since in Card Quiz you can swipe cards for right or wrong, `correct` and `incorrect` buttons are uncessary.
-2) After swiping, the next question car IS displayed automatically.
-3) Once the quiz is completed, the user IS shown the score of correct answers. I have add the logic of retaking wrong quizs, and this functionality is more complex than the rubric, besides this, after retaking all wrong quizs, I don't think users want/need to restart the quiz immediately.
