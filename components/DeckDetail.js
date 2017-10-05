@@ -152,13 +152,7 @@ function mapStateToProps ( decks, { navigation }) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    removeCard: (data) => dispatch(removeCard(data)),
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  { removeCard },
 )(DeckDetail)

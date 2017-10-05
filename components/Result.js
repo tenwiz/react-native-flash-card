@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import * as Progress from 'react-native-progress'
 
-import { styles } from '../utils/styles'
+import { styles, Red, Green } from '../utils/styles'
 import { Back } from '../utils/icons'
 
 import { quizCard } from '../actions/Card'
@@ -44,7 +44,7 @@ class Result extends Component {
             progress={progress}
             showsText={true}
             formatText={() => {return `${Math.floor(progress * 100)}%`}}
-            color={allRight ? '#007A3D' : '#CE1126'}
+            color={allRight ? Green : Red}
             thickness={5}
           />
         </View>
@@ -75,13 +75,7 @@ class Result extends Component {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    quizCard: (data) => dispatch(quizCard(data)),
-  }
-}
-
 export default connect(
   null,
-  mapDispatchToProps,
+  { quizCard },
 )(Result)

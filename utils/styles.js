@@ -1,11 +1,18 @@
 import { StyleSheet, Dimensions } from 'react-native'
 import { Constants } from 'expo'
 
+export const Gray300 = '#E0E0E0'
+export const Gray100 = '#F5F5F5'
+export const Gray50 = '#FAFAFA'
+export const White = '#FFFFFF'
+export const Red = '#CE1126'
+export const Green = '#007A3D'
+
 export const { width, height } = Dimensions.get('window')
 
 export const styles = StyleSheet.create({
   statusBar: {
-    backgroundColor: '#E0E0E0',
+    backgroundColor: Gray300,
     height: Constants.statusBarHeight ,
   },
   viewPort: {
@@ -14,12 +21,12 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#FAFAFA',
+    backgroundColor: Gray50,
   },
   header: {
     width,
     flexDirection: 'row',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: Gray100,
     shadowOpacity: 0.3,
     shadowOffset: {
       height: 3,
@@ -45,7 +52,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   flatCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: White,
     justifyContent: 'center',
     alignItems: 'center',
     shadowOpacity: 0.3,
@@ -110,7 +117,7 @@ export const styles = StyleSheet.create({
     width: width - 40,
   },
   studyButton: {
-    backgroundColor: '#007A3D',
+    backgroundColor: Green,
     width: 250,
     padding: 10,
     borderRadius: 5,
@@ -120,7 +127,7 @@ export const styles = StyleSheet.create({
   footer: {
     width,
     flexDirection: 'row',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: Gray100,
     shadowOpacity: 0.3,
     shadowOffset: {
       height: -3,
@@ -141,7 +148,7 @@ export const styles = StyleSheet.create({
   },
   answer: {
     width: width - 20,
-    height: 500,
+    height: 300,
     padding: 5,
     marginTop: 10,
     fontSize: 20,
@@ -158,7 +165,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   flipCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: White,
     alignItems: 'center',
     shadowOpacity: 0.5,
     shadowOffset: {
@@ -181,13 +188,13 @@ export const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     width: width - 40,
-    color: '#CE1126',
+    color: Red,
   },
   back: {
     fontSize: 25,
     textAlign: 'center',
     width: width - 40,
-    color: '#007A3D',
+    color: Green,
   },
 
   /*
@@ -199,7 +206,7 @@ export const styles = StyleSheet.create({
     marginBottom: 50,
   },
   resultButton: {
-    backgroundColor: '#007A3D',
+    backgroundColor: Green,
     width: 220,
     padding: 10,
     borderRadius: 5,

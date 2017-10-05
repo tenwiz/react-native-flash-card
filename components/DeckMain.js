@@ -144,14 +144,7 @@ function mapStateToProps (decks) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    receiveDecks: (data) => dispatch(receiveDecks(data)),
-    removeDeck: (data) => dispatch(removeDeck(data)),
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  { receiveDecks, removeDeck },
 )(DeckMain)

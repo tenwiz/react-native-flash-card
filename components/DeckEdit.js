@@ -99,14 +99,7 @@ function mapStateToProps (decks) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    addDeck: (data) => dispatch(addDeck(data)),
-    editDeck: (data) => dispatch(editDeck(data)),
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  { addDeck, editDeck },
 )(DeckEdit)

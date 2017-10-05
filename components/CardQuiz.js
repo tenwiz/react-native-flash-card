@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import FlipCard from 'react-native-flip-card'
 import Swiper from 'react-native-deck-swiper'
 
-import { styles } from '../utils/styles'
+import { styles, Gray50, Red, Green, White } from '../utils/styles'
 import { Back } from '../utils/icons'
 import { setLocalNotification, clearLocalNotification } from '../utils/notification'
 
@@ -104,20 +104,20 @@ class CardQuiz extends Component {
             overlayLabels={{
               left: {
                 title: 'NOT YET',
-                swipeColor: '#CE1126',
+                swipeColor: Red,
                 backgroundOpacity: '0.75',
-                fontColor: '#FFF'
+                fontColor: White
               },
               right: {
                 title: 'GOT IT',
-                swipeColor: '#007A3D',
+                swipeColor: Green,
                 backgroundOpacity: '0.75',
-                fontColor: '#FFF'
+                fontColor: White
               },
             }}
             animateOverlayLabelsOpacity
             animateCardOpacity
-            backgroundColor='#FAFAFA'
+            backgroundColor={Gray50}
             verticalSwipe={false}
             cardVerticalMargin={0}
             cardHorizontalMargin={0}
@@ -173,13 +173,7 @@ function mapStateToProps (decks, { navigation }) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    quizCard: (data) => dispatch(quizCard(data)),
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  { quizCard },
 )(CardQuiz)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, TextInput, Alert } from 'react-native'
+import { Text, View, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 
 import { styles } from '../utils/styles'
@@ -108,14 +108,7 @@ function mapStateToProps (decks, { navigation }) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    addCard: (data) => dispatch(addCard(data)),
-    editCard: (data) => dispatch(editCard(data)),
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  { addCard, editCard },
 )(CardEdit)
