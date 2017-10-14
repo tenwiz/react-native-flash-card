@@ -104,15 +104,39 @@ class CardQuiz extends Component {
             overlayLabels={{
               left: {
                 title: 'NOT YET',
-                swipeColor: Red,
-                backgroundOpacity: '0.75',
-                fontColor: White
+                style: {
+                  label: {
+                    backgroundColor: Red,
+                    borderColor: 'black',
+                    color: 'white',
+                    borderWidth: 1
+                  },
+                  wrapper: {
+                    flexDirection: 'column',
+                    alignItems: 'flex-end',
+                    justifyContent: 'flex-start',
+                    marginTop: 30,
+                    marginLeft: -30
+                  }
+                }
               },
               right: {
                 title: 'GOT IT',
-                swipeColor: Green,
-                backgroundOpacity: '0.75',
-                fontColor: White
+                style: {
+                  label: {
+                    backgroundColor: Green,
+                    borderColor: 'black',
+                    color: 'white',
+                    borderWidth: 1
+                  },
+                  wrapper: {
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-start',
+                    marginTop: 30,
+                    marginLeft: 30
+                  }
+                }
               },
             }}
             animateOverlayLabelsOpacity
