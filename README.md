@@ -1,5 +1,3 @@
-[Demos](https://github.com/Martian2Lee/Portfolio)
-
 # Mobile Flashcards
 
 ## Test
