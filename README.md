@@ -20,8 +20,8 @@ In Card Quiz:
 ## Run
 
 * Make sure `yarn` is installed
-* `git clone https://github.com/Martian2Lee/Mobile-Flashcards.git` 
-* `cd Mobile-Flashcards/`
+* `git clone https://github.com/tenwiz/react-native-flash-card.git` 
+* `cd react-native-flash-card/`
 * `yarn install`
 * `yarn start`
 * Follow instructions to open Android or iOS simulator on PC or phone.
