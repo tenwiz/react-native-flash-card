@@ -1,7 +1,7 @@
 # React Native Flashcards
 
-![](https://github.com/tenwiz/react-native-flash-card/blob/master/gifs/1.gif)
-![](https://github.com/tenwiz/react-native-flash-card/blob/master/gifs/2.gif)
+![](https://github.com/tenwiz/react-native-flash-card/blob/master/1.gif)
+![](https://github.com/tenwiz/react-native-flash-card/blob/master/2.gif)
 
 ## Test
 
