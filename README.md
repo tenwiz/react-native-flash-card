@@ -1,4 +1,7 @@
-# Mobile Flashcards
+# React Native Flashcards
+
+![](https://github.com/tenwiz/react-native-flash-card/blob/master/gifs/1.gif)
+![](https://github.com/tenwiz/react-native-flash-card/blob/master/gifs/2.gif)
 
 ## Test
 
